@@ -1,0 +1,17 @@
+{
+  "bookingId": "6a7153e15101579f600d3b7b",
+  "reservationId": "RES-G9S5MHTU",
+  "saveStatus": 200,
+  "templateId": "6a68d1e951780dd8d0ccdcaa",
+  "templateVersion": 3,
+  "failures": [],
+  "pass": true,
+  "pdfPath": "C:\\Users\\zakar\\Desktop\\Backup projet HDN CAR\\CarRental-fullstack-main\\server\\uploads\\contracts\\6a68cd7069804c8feec7a8d9\\contract-RES-G9S5MHTU-cpr027gf.pdf",
+  "pdfError": null,
+  "sampleVars": {
+    "customer_name": "Audit Test Locataire",
+    "identity_document": "AB123456",
+    "second_driver_name": "Second Audit Driver",
+    "car_registration": "31554 A 81"
+  }
+}

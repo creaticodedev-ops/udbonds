@@ -1,0 +1,508 @@
+/* RSZ CAR demo / contact — 50/50 split matching signup system */
+
+.mkt:has(.mkt-demo) {
+  background: #070707;
+  color: #f5f5f5;
+}
+
+.mkt-demo {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+  background: #070707;
+  color: rgba(255, 255, 255, 0.88);
+  padding: calc(5.1rem + env(safe-area-inset-top)) 0 max(2rem, env(safe-area-inset-bottom));
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.mkt-demo-atmos {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mkt-demo-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+.mkt-demo-glow.is-a {
+  width: min(36rem, 70vw);
+  height: min(36rem, 70vw);
+  left: -12%;
+  top: -18%;
+  background: radial-gradient(circle, rgba(165, 22, 36, 0.26), transparent 68%);
+}
+
+.mkt-demo-glow.is-b {
+  width: min(28rem, 55vw);
+  height: min(28rem, 55vw);
+  right: -10%;
+  bottom: -12%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.045), transparent 70%);
+}
+
+.mkt-demo-rule {
+  position: absolute;
+  left: 50%;
+  top: calc(4.55rem + env(safe-area-inset-top));
+  width: min(42rem, 70vw);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(165, 22, 36, 0.42), transparent);
+}
+
+.mkt-demo-orb {
+  position: absolute;
+  left: 12%;
+  bottom: 18%;
+  width: min(18rem, 42vw);
+  height: min(18rem, 42vw);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 60px rgba(165, 22, 36, 0.08);
+}
+
+.mkt-demo-mark {
+  position: absolute;
+  left: 4%;
+  bottom: 6%;
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 14vw, 9rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  color: rgba(255, 255, 255, 0.035);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.mkt-demo-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  flex: 1;
+  display: grid;
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+@media (min-width: 980px) {
+  .mkt-demo-shell {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    min-height: calc(100svh - 7rem);
+    align-items: center;
+  }
+}
+
+.mkt-demo-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mkt-demo-brand-inner {
+  width: 100%;
+  max-width: 32rem;
+}
+
+@media (min-width: 980px) {
+  .mkt-demo-brand {
+    min-height: 100%;
+    padding-inline-end: 0.75rem;
+  }
+
+  .mkt-demo-brand-inner {
+    padding: 1.25rem 0;
+  }
+}
+
+.mkt-demo-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #A51624;
+}
+
+.mkt-demo-kicker i {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 99px;
+  background: #A51624;
+  box-shadow: 0 0 0 4px rgba(165, 22, 36, 0.2);
+}
+
+.mkt-demo-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.6vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.mkt-demo-title em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.mkt-demo-lead {
+  margin: 0.9rem 0 0;
+  max-width: 28rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mkt-demo-lead a {
+  color: #fff;
+  text-underline-offset: 0.18em;
+}
+
+.mkt-demo-checks {
+  list-style: none;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.mkt-demo-checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mkt-demo-checks svg {
+  flex: none;
+  margin-top: 0.15rem;
+  color: #A51624;
+}
+
+.mkt-demo-steps {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 1.15rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  gap: 0.7rem;
+}
+
+.mkt-demo-steps li {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.mkt-demo-steps strong {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: rgba(165, 22, 36, 0.95);
+}
+
+.mkt-demo-steps span {
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.mkt-demo-alt {
+  margin-top: 1.4rem;
+}
+
+.mkt-demo-wa {
+  min-height: 2.55rem !important;
+  min-width: 0 !important;
+  padding-inline: 0.95rem !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  box-shadow: none !important;
+}
+
+.mkt-demo-wa:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.26) !important;
+  transform: none !important;
+}
+
+.mkt-demo-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 980px) {
+  .mkt-demo-stage {
+    min-height: 100%;
+    padding: 0.5rem 0;
+  }
+}
+
+.mkt-demo-panel {
+  width: 100%;
+  max-width: 28.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+  backdrop-filter: blur(18px) saturate(1.1);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  box-shadow:
+    0 28px 70px -40px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  padding: 1.25rem 1.1rem 1.2rem;
+}
+
+@media (min-width: 480px) {
+  .mkt-demo-panel {
+    padding: 1.45rem 1.4rem 1.35rem;
+  }
+}
+
+.mkt-demo-form-head {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.mkt-demo-form-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.mkt-demo-form h2,
+.mkt-demo-success h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.6vw, 1.6rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.mkt-demo-form-lead {
+  margin: 0.45rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mkt-demo-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .mkt-demo-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mkt-demo-field.is-full {
+    grid-column: 1 / -1;
+  }
+}
+
+.mkt-demo-field {
+  display: grid;
+  gap: 0.32rem;
+}
+
+.mkt-demo-field span {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.mkt-demo-field input,
+.mkt-demo-field select,
+.mkt-demo-field textarea {
+  width: 100%;
+  min-height: 2.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(0, 0, 0, 0.38);
+  color: #fff;
+  padding: 0.65rem 0.85rem;
+  font: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mkt-demo-field textarea {
+  min-height: 5.4rem;
+  resize: vertical;
+}
+
+.mkt-demo-field input::placeholder,
+.mkt-demo-field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.mkt-demo-field input:hover,
+.mkt-demo-field select:hover,
+.mkt-demo-field textarea:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mkt-demo-field input:focus,
+.mkt-demo-field select:focus,
+.mkt-demo-field textarea:focus {
+  outline: none;
+  border-color: rgba(165, 22, 36, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(165, 22, 36, 0.18);
+}
+
+.mkt-demo-field select {
+  color-scheme: dark;
+}
+
+.mkt-demo-submit {
+  width: 100%;
+  min-height: 3.05rem;
+  margin-top: 1.1rem;
+  justify-content: center;
+  font-size: 0.92rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 14px 34px -18px rgba(165, 22, 36, 0.75);
+}
+
+.mkt-demo-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.mkt-demo-spin {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 99px;
+  animation: mkt-demo-spin 0.7s linear infinite;
+}
+
+@keyframes mkt-demo-spin {
+  to { transform: rotate(360deg); }
+}
+
+.mkt-demo-note {
+  margin: 0.85rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.42);
+  text-align: center;
+}
+
+.mkt-demo-note a {
+  color: #fff;
+  text-underline-offset: 0.16em;
+}
+
+.mkt-demo-success {
+  text-align: center;
+  padding: 0.6rem 0.2rem 0.25rem;
+}
+
+.mkt-demo-success-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-bottom: 0.8rem;
+  border-radius: 99px;
+  background: #A51624;
+  box-shadow: 0 12px 28px -14px rgba(165, 22, 36, 0.8);
+}
+
+.mkt-demo-success .mkt-demo-lead {
+  margin-inline: auto;
+  max-width: 26rem;
+}
+
+.mkt-demo-success-actions {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.mkt-demo-success-actions .mkt-btn,
+.mkt-demo-success-actions .mkt-demo-wa {
+  width: 100%;
+  justify-content: center;
+  min-height: 2.95rem;
+}
+
+@media (max-width: 979px) {
+  .mkt-demo-brand-inner {
+    max-width: 34rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .mkt-demo-lead {
+    margin-inline: auto;
+  }
+
+  .mkt-demo-checks {
+    text-align: start;
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+
+  .mkt-demo-steps {
+    max-width: 28rem;
+    margin-inline: auto;
+    text-align: start;
+  }
+
+  .mkt-demo-alt {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mkt-demo-orb,
+  .mkt-demo-mark {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 639px) {
+  .mkt-demo-steps {
+    display: none;
+  }
+
+  .mkt-demo-alt {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mkt-demo-spin,
+  .mkt-demo-submit {
+    animation: none;
+    transition: none;
+  }
+}
