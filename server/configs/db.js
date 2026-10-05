@@ -1,68 +1,29 @@
-import mongoose from "mongoose";
-import { seedPickupLocations } from "../controllers/pickupLocationController.js";
+import mongoose from 'mongoose'
 
-/**
- * Build a Mongo connection string that works with:
- * - mongodb://host:27017
- * - mongodb://host:27017/already-named
- * - mongodb+srv://.../?retryWrites=true
- */
-export const buildMongoUri = (rawUri, dbName = "car-rental") => {
-  const uri = String(rawUri || "").trim();
-  if (!uri) throw new Error("MONGODB_URI is empty");
+const STATES = ['disconnected', 'connected', 'connecting', 'disconnecting']
 
-  // Already has a database path segment (not just host)
-  try {
-    const parsed = new URL(uri);
-    const path = parsed.pathname || "";
-    if (path && path !== "/" && path.length > 1) {
-      return uri;
-    }
-    parsed.pathname = `/${dbName}`;
-    return parsed.toString();
-  } catch {
-    // Fallback for non-standard URIs
-    if (uri.includes("?")) {
-      const [base, qs] = uri.split("?");
-      const cleaned = base.replace(/\/$/, "");
-      if (/\/[^/]+$/.test(cleaned.replace(/^mongodb(\+srv)?:\/\//, ""))) {
-        return uri;
-      }
-      return `${cleaned}/${dbName}?${qs}`;
-    }
-    return `${uri.replace(/\/$/, "")}/${dbName}`;
-  }
-};
+export const dbState = () => STATES[mongoose.connection.readyState] ?? 'unknown'
 
-const connectDB = async () => {
-  if (!process.env.MONGODB_URI) {
-    console.error("MONGODB_URI is not defined");
-    process.exit(1);
+/** Connects to MongoDB using `MONGODB_URI`. Resolves to `true` on success, `false` otherwise. */
+export const connectDB = async () => {
+  const uri = process.env.MONGODB_URI?.trim()
+  if (!uri) {
+    console.error('[db] MONGODB_URI is not defined — copy server/.env.example to server/.env')
+    return false
   }
 
-  try {
-    mongoose.connection.on("error", (err) => console.error("MongoDB connection error:", err.message));
-    mongoose.connection.on("disconnected", () => console.warn("MongoDB disconnected"));
+  mongoose.connection.on('disconnected', () => console.warn('[db] MongoDB disconnected'))
+  mongoose.connection.on('reconnected', () => console.log('[db] MongoDB reconnected'))
 
-    await mongoose.connect(buildMongoUri(process.env.MONGODB_URI));
-    console.log("Database connected");
-    try {
-      const { runAgencyMigration } = await import("../services/agencyMigration.js");
-      await runAgencyMigration();
-    } catch (migrationError) {
-      console.error("[agencyMigration]", migrationError.message);
-    }
-    await seedPickupLocations();
-    try {
-      const { ensurePromotionIndexes } = await import("../services/ensurePromotionIndexes.js");
-      await ensurePromotionIndexes();
-    } catch (indexError) {
-      console.warn("[ensurePromotionIndexes]", indexError.message);
-    }
+  try {
+    await mongoose.connect(uri, { serverSelectionTimeoutMS: 5000 })
+    const { host, port, name } = mongoose.connection
+    console.log(`[db] Connected to mongodb://${host}:${port}/${name}`)
+    return true
   } catch (error) {
-    console.error("Database connection failed:", error.message);
-    process.exit(1);
+    console.error(`[db] Connection failed: ${error.message}`)
+    return false
   }
-};
+}
 
-export default connectDB;
+export const disconnectDB = () => mongoose.disconnect()

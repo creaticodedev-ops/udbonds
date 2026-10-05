@@ -1,7 +1,14 @@
 {
-  "dependencies": {
-    "framer-motion": "^12.42.2",
-    "motion": "^12.42.2",
-    "puppeteer": "^25.3.0"
+  "name": "udbonds",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "npm install --prefix client && npm install --prefix server",
+    "dev": "node scripts/dev.mjs",
+    "dev:client": "npm run dev --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix client",
+    "lint": "npm run lint --prefix client"
   }
 }

@@ -26,12 +26,12 @@ export const LandingPage = () => {
         <Hero />
         <Intro />
         <Services />
-        <MarketSection />
-        <CapitalSection />
         <OffersPreview />
+        <CapitalSection />
+        <MarketSection />
         <WhyUDBonds />
-        <HowItWorks />
         <InsightsPreview />
+        <HowItWorks />
         <Approach />
         <FinalCTA />
       </main>
