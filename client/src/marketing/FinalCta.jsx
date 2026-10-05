@@ -9,17 +9,17 @@ const Car = ({ uid }) => (
     <defs>
       <linearGradient id={`${uid}-body`} x1="80" y1="40" x2="640" y2="180" gradientUnits="userSpaceOnUse">
         <stop offset="0" stopColor="#fff" stopOpacity="0.08" />
-        <stop offset="0.35" stopColor="#f3e7e2" stopOpacity="0.38" />
-        <stop offset="0.72" stopColor="#c9b3b0" stopOpacity="0.22" />
-        <stop offset="1" stopColor="#1a0a0a" stopOpacity="0.55" />
+        <stop offset="0.35" stopColor="#eef1ef" stopOpacity="0.38" />
+        <stop offset="0.72" stopColor="#b9c4bf" stopOpacity="0.22" />
+        <stop offset="1" stopColor="#050706" stopOpacity="0.55" />
       </linearGradient>
       <linearGradient id={`${uid}-glass`} x1="240" y1="48" x2="520" y2="108" gradientUnits="userSpaceOnUse">
         <stop offset="0" stopColor="#fff" stopOpacity="0.42" />
-        <stop offset="1" stopColor="#3a1818" stopOpacity="0.18" />
+        <stop offset="1" stopColor="#0c1a14" stopOpacity="0.18" />
       </linearGradient>
       <linearGradient id={`${uid}-beam`} x1="680" y1="120" x2="760" y2="120" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="#fff6e4" stopOpacity="0.55" />
-        <stop offset="1" stopColor="#fff6e4" stopOpacity="0" />
+        <stop offset="0" stopColor="#ffffff" stopOpacity="0.55" />
+        <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
       </linearGradient>
     </defs>
     <ellipse className="mkt-final-shadow" cx="360" cy="200" rx="272" ry="11" />

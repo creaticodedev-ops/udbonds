@@ -5,7 +5,7 @@ export const SaasSteps = () => {
   const steps = ta('saas.steps')
 
   return (
-    <section className="saas-section" id="how">
+    <section className="saas-section mkt-light" id="how">
       <div className="mkt-wrap">
         <div className="saas-intro is-center">
           <p className="saas-kicker">{t('saas.stepsKicker')}</p>

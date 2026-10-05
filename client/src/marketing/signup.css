@@ -36,7 +36,7 @@
   right: 50%;
   top: -18%;
   translate: 50% 0;
-  background: radial-gradient(circle, rgba(165, 22, 36, 0.22), transparent 68%);
+  background: radial-gradient(circle, rgba(16, 132, 98, 0.165), transparent 68%);
 }
 
 .mkt-signup-glow.is-b {
@@ -55,7 +55,7 @@
   width: min(28rem, 62vw);
   height: 1px;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(165, 22, 36, 0.42), transparent);
+  background: linear-gradient(90deg, transparent, rgba(16, 132, 98, 0.315), transparent);
 }
 
 .mkt-signup-shell {
@@ -85,15 +85,15 @@
   font-weight: 650;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #A51624;
+  color: var(--ud-green-light);
 }
 
 .mkt-signup-kicker i {
   width: 0.38rem;
   height: 0.38rem;
   border-radius: 99px;
-  background: #A51624;
-  box-shadow: 0 0 0 4px rgba(165, 22, 36, 0.2);
+  background: var(--ud-green);
+  box-shadow: 0 0 0 4px rgba(16, 132, 98, 0.15);
 }
 
 .mkt-signup-hero h1 {
@@ -142,7 +142,7 @@
 .mkt-signup-checks svg {
   flex: none;
   margin-top: 0.12rem;
-  color: #A51624;
+  color: var(--ud-green-light);
 }
 
 .mkt-signup-panel {
@@ -250,9 +250,9 @@
 .mkt-signup-field input:focus,
 .mkt-signup-field select:focus {
   outline: none;
-  border-color: rgba(165, 22, 36, 0.7);
+  border-color: rgba(16, 132, 98, 0.525);
   background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 0 0 3px rgba(165, 22, 36, 0.18);
+  box-shadow: 0 0 0 3px rgba(16, 132, 98, 0.135);
 }
 
 .mkt-signup-field select {
@@ -261,13 +261,13 @@
 
 .mkt-signup-field.is-bad input,
 .mkt-signup-field.is-bad select {
-  border-color: rgba(220, 80, 80, 0.7);
+  border-color: rgba(224, 133, 126, 0.6);
 }
 
 .mkt-signup-field em {
   font-style: normal;
   font-size: 0.72rem;
-  color: #ff8e8e;
+  color: var(--ud-error);
 }
 
 .mkt-signup-pass {
@@ -323,7 +323,7 @@
   content: '+';
   display: inline-block;
   margin-inline-end: 0.4rem;
-  color: #A51624;
+  color: var(--ud-green-light);
   font-weight: 700;
 }
 
@@ -340,9 +340,9 @@
   margin: 0.9rem 0 0;
   padding: 0.7rem 0.8rem;
   border-radius: 0.7rem;
-  background: rgba(165, 22, 36, 0.16);
-  border: 1px solid rgba(165, 22, 36, 0.35);
-  color: #ffc9c9;
+  background: rgba(224, 133, 126, 0.08);
+  border: 1px solid rgba(224, 133, 126, 0.3);
+  color: #f1c9c5;
   font-size: 0.86rem;
 }
 
@@ -354,7 +354,7 @@
   font-size: 0.92rem;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    0 14px 34px -18px rgba(165, 22, 36, 0.75);
+    0 14px 34px -18px rgba(16, 132, 98, 0.563);
 }
 
 .mkt-signup-submit:hover:not(:disabled) {
@@ -440,8 +440,8 @@
   height: 2.6rem;
   margin-bottom: 0.8rem;
   border-radius: 99px;
-  background: #A51624;
-  box-shadow: 0 12px 28px -14px rgba(165, 22, 36, 0.8);
+  background: var(--ud-green);
+  box-shadow: 0 12px 28px -14px rgba(16, 132, 98, 0.6);
 }
 
 .mkt-signup-success .mkt-signup-lead {

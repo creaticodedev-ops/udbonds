@@ -1,23 +1,8 @@
-/* RSZ CAR SaaS marketing — white / black / red */
+/* SaaS marketing home — black / white / green (tokens live in marketing.css) */
 
 .mkt {
-  --mkt-bg: #ffffff;
-  --mkt-paper: #ffffff;
-  --mkt-ink: #0a0a0a;
-  --mkt-muted: #5a5a5a;
-  --mkt-line: rgba(10, 10, 10, 0.1);
-  --mkt-line-strong: rgba(10, 10, 10, 0.16);
-  --mkt-accent: #A51624;
-  --mkt-accent-hover: #8C131F;
-  --mkt-soft: rgba(165, 22, 36, 0.07);
-  --mkt-hero: #ffffff;
-  --mkt-hero-ink: #0a0a0a;
-  --mkt-shadow: 0 24px 60px -28px rgba(10, 10, 10, 0.28);
-  --mkt-radius: 10px;
-  --saas-black: #0a0a0a;
-  --saas-surface: #f7f7f7;
-  background: var(--mkt-bg);
-  color: var(--mkt-ink);
+  --saas-black: var(--ud-black);
+  --saas-surface: var(--ud-obsidian);
 }
 
 /* —— Shared —— */
@@ -86,17 +71,17 @@
 
 /* —— Shared button polish —— */
 .mkt-btn-primary {
-  background: var(--mkt-accent);
+  background: var(--mkt-cta);
   color: #fff;
-  border-color: var(--mkt-accent);
+  border-color: var(--mkt-cta);
   border-radius: 999px;
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
 .mkt-btn-primary:hover {
-  background: var(--mkt-accent-hover);
-  border-color: var(--mkt-accent-hover);
+  background: var(--mkt-cta-hover);
+  border-color: var(--mkt-cta-hover);
 }
 
 .mkt-btn-ghost {
@@ -151,8 +136,8 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(165, 22, 36, 0.22), transparent 58%),
-    radial-gradient(ellipse 45% 40% at 90% 70%, rgba(165, 22, 36, 0.1), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 50% -10%, rgba(16, 132, 98, 0.165), transparent 58%),
+    radial-gradient(ellipse 45% 40% at 90% 70%, rgba(16, 132, 98, 0.075), transparent 60%),
     linear-gradient(180deg, #070707 0%, #0b0b0b 48%, #050505 100%);
 }
 
@@ -173,7 +158,7 @@
   left: 35%;
   width: 30%;
   height: 70%;
-  background: linear-gradient(180deg, rgba(165, 22, 36, 0.16), transparent 70%);
+  background: linear-gradient(180deg, rgba(16, 132, 98, 0.12), transparent 70%);
   filter: blur(40px);
   transform: rotate(-18deg);
   opacity: 0.7;
@@ -191,7 +176,7 @@
   height: 18rem;
   top: 12%;
   right: 8%;
-  background: rgba(165, 22, 36, 0.35);
+  background: rgba(16, 132, 98, 0.18);
 }
 
 .saas-hero-orb.is-b {
@@ -232,8 +217,8 @@
   width: 0.4rem;
   height: 0.4rem;
   border-radius: 50%;
-  background: #A51624;
-  box-shadow: 0 0 0 4px rgba(165, 22, 36, 0.2);
+  background: var(--ud-green);
+  box-shadow: 0 0 0 4px rgba(16, 132, 98, 0.15);
 }
 
 .saas-hero-title {
@@ -262,9 +247,9 @@
   height: 0.42em;
   margin-left: 0.18em;
   border-radius: 50%;
-  background: #A51624;
+  background: var(--ud-green);
   vertical-align: 0.18em;
-  box-shadow: 0 0 0 0.18em rgba(165, 22, 36, 0.2);
+  box-shadow: 0 0 0 0.18em rgba(16, 132, 98, 0.15);
 }
 
 .saas-hero-lead {
@@ -287,7 +272,7 @@
   min-width: 12rem;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 18px 42px -16px rgba(165, 22, 36, 0.95);
+    0 18px 42px -16px rgba(16, 132, 98, 0.45);
 }
 
 .saas-hero-signal {
@@ -324,7 +309,7 @@
   z-index: 0;
   border-radius: 40px;
   background:
-    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(165, 22, 36, 0.4), transparent 42%),
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(16, 132, 98, 0.2), transparent 42%),
     radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.08), transparent 55%);
   filter: blur(24px);
   pointer-events: none;
@@ -354,7 +339,7 @@
     105deg,
     transparent,
     rgba(255, 255, 255, 0.04) 40%,
-    rgba(165, 22, 36, 0.35) 50%,
+    rgba(16, 132, 98, 0.262) 50%,
     rgba(255, 255, 255, 0.08) 58%,
     transparent
   );
@@ -444,7 +429,7 @@
 }
 
 .saas-hero-chrome span:first-child {
-  background: #A51624;
+  background: var(--ud-green);
 }
 
 .saas-hero-chrome p {
@@ -743,7 +728,7 @@
   padding: 0.35rem 0.7rem;
   border: 1px solid var(--mkt-line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--mkt-paper);
   font-size: 0.75rem;
   font-weight: 550;
   color: var(--mkt-ink);
@@ -751,7 +736,7 @@
 
 /* —— Problem / solution —— */
 .saas-problem {
-  background: #fff;
+  background: var(--mkt-bg);
 }
 
 .saas-problem-grid {
@@ -770,7 +755,7 @@
   padding: clamp(1.4rem, 3vw, 2rem);
   border: 1px solid var(--mkt-line);
   border-radius: 14px;
-  background: #fff;
+  background: var(--mkt-paper);
 }
 
 .saas-panel.is-dark {
@@ -780,7 +765,7 @@
 }
 
 .saas-panel.is-dark .saas-kicker {
-  color: #ff5a52;
+  color: var(--ud-green-light);
 }
 
 .saas-panel.is-dark h3,
@@ -824,7 +809,7 @@
   height: 0.45rem;
   margin-top: 0.45rem;
   border-radius: 50%;
-  background: rgba(10, 10, 10, 0.25);
+  background: var(--mkt-line-strong);
 }
 
 .saas-panel.is-dark li::before {
@@ -860,12 +845,12 @@
   padding: 1.35rem 1.35rem 1.45rem;
   border: 1px solid var(--mkt-line);
   border-radius: 14px;
-  background: #fff;
+  background: var(--mkt-paper);
   transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
 .saas-feat:hover {
-  border-color: rgba(165, 22, 36, 0.35);
+  border-color: rgba(16, 132, 98, 0.262);
   transform: translateY(-2px);
 }
 
@@ -904,7 +889,7 @@
 .saas-feat li {
   padding: 0.28rem 0.55rem;
   border-radius: 999px;
-  background: var(--saas-surface);
+  background: var(--mkt-line);
   font-size: 0.72rem;
   font-weight: 550;
   color: var(--mkt-ink);
@@ -913,7 +898,7 @@
 /* —— Showcase premiere + explore —— */
 .saas-showcase {
   padding-block: 0;
-  background: #fff;
+  background: var(--ud-obsidian);
 }
 
 .saas-premiere {
@@ -921,7 +906,7 @@
   overflow: clip;
   padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(3.25rem, 7vw, 5rem);
   background:
-    radial-gradient(ellipse 50% 42% at 50% 0%, rgba(165, 22, 36, 0.2), transparent 58%),
+    radial-gradient(ellipse 50% 42% at 50% 0%, rgba(16, 132, 98, 0.15), transparent 58%),
     linear-gradient(180deg, #050505 0%, #0e0e0e 46%, #090909 100%);
   color: #f4f4f4;
 }
@@ -930,7 +915,7 @@
   position: absolute;
   inset: auto 10% -18% 10%;
   height: 42%;
-  background: radial-gradient(ellipse at center, rgba(165, 22, 36, 0.18), transparent 68%);
+  background: radial-gradient(ellipse at center, rgba(16, 132, 98, 0.135), transparent 68%);
   filter: blur(30px);
   pointer-events: none;
 }
@@ -956,7 +941,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #A51624;
+  color: var(--ud-green-light);
 }
 
 .saas-premiere-title {
@@ -998,7 +983,7 @@
   min-width: 11.5rem;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 16px 40px -16px rgba(165, 22, 36, 0.9);
+    0 16px 40px -16px rgba(16, 132, 98, 0.45);
 }
 
 .saas-premiere-note {
@@ -1030,14 +1015,14 @@
 }
 
 .mkt-btn-whatsapp:hover {
-  background: rgba(37, 211, 102, 0.12);
-  border-color: rgba(37, 211, 102, 0.55);
-  box-shadow: 0 12px 28px -18px rgba(37, 211, 102, 0.55);
+  background: rgba(16, 132, 98, 0.12);
+  border-color: rgba(16, 132, 98, 0.55);
+  box-shadow: 0 12px 28px -18px rgba(16, 132, 98, 0.55);
   transform: translateY(-1px);
 }
 
 .mkt-btn-whatsapp:focus-visible {
-  outline: 2px solid #25d366;
+  outline: 2px solid var(--ud-green-light);
   outline-offset: 3px;
 }
 
@@ -1067,7 +1052,7 @@
   z-index: 0;
   border-radius: 32px;
   background:
-    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(165, 22, 36, 0.42), transparent 44%),
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(16, 132, 98, 0.2), transparent 44%),
     radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.07), transparent 55%);
   filter: blur(22px);
   opacity: 0.9;
@@ -1100,7 +1085,7 @@
     105deg,
     transparent 0%,
     rgba(255, 255, 255, 0.03) 38%,
-    rgba(165, 22, 36, 0.32) 50%,
+    rgba(16, 132, 98, 0.24) 50%,
     rgba(255, 255, 255, 0.08) 58%,
     transparent 78%
   );
@@ -1128,7 +1113,7 @@
 }
 
 .saas-premiere-lines path {
-  stroke: rgba(165, 22, 36, 0.45);
+  stroke: rgba(16, 132, 98, 0.338);
   stroke-width: 0.35;
   stroke-dasharray: 40;
   stroke-dashoffset: 40;
@@ -1166,7 +1151,7 @@
   height: 0.38rem;
   border-radius: 50%;
   background: var(--mkt-accent);
-  box-shadow: 0 0 0 3px rgba(165, 22, 36, 0.25);
+  box-shadow: 0 0 0 3px rgba(16, 132, 98, 0.188);
 }
 
 @media (min-width: 900px) {
@@ -1212,7 +1197,7 @@
 .saas-premiere-frame:hover {
   box-shadow:
     0 54px 100px -36px rgba(0, 0, 0, 0.98),
-    0 0 0 1px rgba(165, 22, 36, 0.25) inset;
+    0 0 0 1px rgba(16, 132, 98, 0.188) inset;
 }
 
 .saas-showcase.is-in:not(.is-settled) .saas-premiere-frame.has-depth {
@@ -1377,7 +1362,7 @@
   padding: 0.75rem 0.9rem;
   border: 1px solid var(--mkt-line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--mkt-paper);
   color: var(--mkt-ink);
   text-align: left;
   cursor: pointer;
@@ -1391,7 +1376,7 @@
   }
 }
 
-.saas-stage-tab:hover { border-color: rgba(10, 10, 10, 0.2); }
+.saas-stage-tab:hover { border-color: var(--mkt-line-strong); }
 
 .saas-stage-tab:focus-visible {
   outline: 2px solid var(--mkt-accent);
@@ -1399,8 +1384,8 @@
 }
 
 .saas-stage-tab[aria-selected='true'] {
-  border-color: rgba(165, 22, 36, 0.35);
-  background: rgba(165, 22, 36, 0.05);
+  border-color: rgba(16, 132, 98, 0.262);
+  background: rgba(16, 132, 98, 0.038);
   box-shadow: inset 3px 0 0 var(--mkt-accent);
 }
 
@@ -1618,7 +1603,7 @@
 }
 
 .saas-outcomes .saas-kicker {
-  color: #ff8a82;
+  color: var(--ud-green-light);
 }
 
 .saas-outcome-grid {
@@ -1673,7 +1658,7 @@
   position: relative;
   padding: 1.25rem 1.15rem 1.35rem;
   border-top: 2px solid var(--mkt-ink);
-  background: #fff;
+  background: var(--mkt-bg);
 }
 
 .saas-step::before {
@@ -1725,12 +1710,13 @@
   padding: 1.5rem 1.35rem 1.4rem;
   border: 1px solid var(--mkt-line);
   border-radius: 14px;
-  background: #fff;
+  background: var(--mkt-paper);
 }
 
 .saas-plan.is-pop {
-  border-color: var(--mkt-accent);
-  box-shadow: 0 20px 50px -30px rgba(165, 22, 36, 0.45);
+  border-color: var(--mkt-cta);
+  background: var(--ud-surface-2);
+  box-shadow: 0 20px 50px -30px rgba(16, 132, 98, 0.338);
 }
 
 .saas-plan-badge {
@@ -1739,7 +1725,7 @@
   right: 0.9rem;
   padding: 0.25rem 0.55rem;
   border-radius: 999px;
-  background: var(--mkt-accent);
+  background: var(--mkt-cta);
   color: #fff;
   font-size: 0.65rem;
   font-weight: 700;
@@ -1802,11 +1788,28 @@
   width: 1rem;
   height: 1rem;
   margin-top: 0.15rem;
+  color: var(--mkt-muted);
+}
+
+.saas-plan.is-pop li svg,
+.saas-plan.is-pop .saas-plan-price {
   color: var(--mkt-accent);
 }
 
 .saas-plan .mkt-btn {
   width: 100%;
+}
+
+.saas-plan:not(.is-pop) .mkt-btn-primary {
+  background: var(--ud-soft-white);
+  border-color: var(--ud-soft-white);
+  color: var(--ud-obsidian);
+  box-shadow: none;
+}
+
+.saas-plan:not(.is-pop) .mkt-btn-primary:hover {
+  background: var(--ud-white);
+  border-color: var(--ud-white);
 }
 
 .saas-pricing-note {
@@ -1873,7 +1876,7 @@
   isolation: isolate;
   padding-block: clamp(4.2rem, 11vw, 7.4rem) clamp(3.2rem, 7vw, 4.8rem);
   background:
-    radial-gradient(ellipse 55% 70% at 88% 18%, rgba(165, 22, 36, 0.26), transparent 58%),
+    radial-gradient(ellipse 55% 70% at 88% 18%, rgba(16, 132, 98, 0.195), transparent 58%),
     radial-gradient(ellipse 40% 50% at 12% 90%, rgba(255, 255, 255, 0.035), transparent 62%),
     #070707;
   color: #fff;
@@ -1894,7 +1897,7 @@
   right: -18%;
   top: -28%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(165, 22, 36, 0.22), transparent 68%);
+  background: radial-gradient(circle, rgba(16, 132, 98, 0.165), transparent 68%);
   filter: blur(10px);
   animation: saas-final-glow 16s ease-in-out infinite alternate;
 }
@@ -1906,7 +1909,7 @@
   width: min(18rem, 48vw);
   height: 1px;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, rgba(165, 22, 36, 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgba(16, 132, 98, 0.525), transparent);
 }
 
 .saas-final-inner {
@@ -1915,7 +1918,7 @@
 }
 
 .saas-final .saas-kicker {
-  color: #A51624;
+  color: var(--ud-green-light);
   justify-content: center;
 }
 

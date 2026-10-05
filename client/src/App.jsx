@@ -82,7 +82,14 @@ const PublicHome = () => {
   return <MarketingHome />
 }
 
-const RouteFallback = () => <Loader />
+const RouteFallback = ({ marketing = false }) =>
+  marketing ? (
+    <div className="mkt mkt-route-fallback">
+      <Loader />
+    </div>
+  ) : (
+    <Loader />
+  )
 
 const App = () => {
   const { showLogin, hostTenant } = useAppContext()
@@ -138,7 +145,7 @@ const App = () => {
         tabIndex={-1}
         className={needsNavOffset ? 'pt-[calc(4.05rem+env(safe-area-inset-top))] sm:pt-[calc(4.55rem+env(safe-area-inset-top))]' : ''}
       >
-        <Suspense fallback={<RouteFallback />}>
+        <Suspense fallback={<RouteFallback marketing={marketing} />}>
           <Routes>
             <Route path="/" element={<PublicHome />} />
             <Route path="/signup" element={<SignupPage />} />

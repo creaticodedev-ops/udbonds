@@ -8,7 +8,7 @@ export const SaasProblem = () => {
   const solutions = ta('saas.solutions')
 
   return (
-    <section className="saas-section saas-problem" id="features">
+    <section className="saas-section saas-problem mkt-light" id="features">
       <div className="mkt-wrap">
         <div className="saas-intro">
           <p className="saas-kicker">{t('saas.problemKicker')}</p>

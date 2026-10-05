@@ -13,7 +13,7 @@
   width: 62%;
   height: 125%;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(165, 22, 36, 0.38) 0%, rgba(165, 22, 36, 0) 66%);
+  background: radial-gradient(ellipse at center, rgba(16, 132, 98, 0.285) 0%, rgba(16, 132, 98, 0) 66%);
   transform-origin: 70% 30%;
 }
 
@@ -24,7 +24,7 @@
   width: 52%;
   height: 90%;
   opacity: 0.5;
-  background: radial-gradient(ellipse at center, rgba(165, 22, 36, 0.2), transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(16, 132, 98, 0.15), transparent 70%);
   animation: mkt-haze-drift 28s ease-in-out infinite alternate;
 }
 
@@ -36,7 +36,7 @@
   top: 16%;
   pointer-events: none;
   z-index: 2;
-  background: radial-gradient(ellipse at center, rgba(255, 236, 220, 0.07), transparent 68%);
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.07), transparent 68%);
 }
 
 .mkt-xp-hero::after {
@@ -47,7 +47,7 @@
   height: 5.2rem;
   z-index: 2;
   pointer-events: none;
-  background: linear-gradient(to bottom, transparent, #0b0908);
+  background: linear-gradient(to bottom, transparent, #070908);
 }
 
 .mkt-xp-hero::before {
@@ -74,12 +74,12 @@
 }
 
 .mkt-xp-hero-copy .mkt-lead {
-  color: rgba(246, 239, 232, 0.72);
+  color: rgba(244, 245, 243, 0.72);
 }
 
 .mkt-xp-hero .mkt-h1 em {
   font-style: italic;
-  color: #e8b4b0;
+  color: var(--ud-green-light);
 }
 
 .mkt-xp-scrollhint {
@@ -90,7 +90,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(246, 239, 232, 0.42);
+  color: rgba(244, 245, 243, 0.42);
 }
 
 .mkt-xp-hero-copy .mkt-h1 {
@@ -114,11 +114,11 @@
   margin: 0;
   border-radius: 10px;
   overflow: hidden;
-  background: #0e0c0b;
-  border: 1px solid rgba(246, 239, 232, 0.1);
+  background: #0c0f0e;
+  border: 1px solid rgba(244, 245, 243, 0.1);
   box-shadow:
     0 28px 56px -30px rgba(0, 0, 0, 0.72),
-    0 0 0 1px rgba(165, 22, 36, 0.12) inset;
+    0 0 0 1px rgba(16, 132, 98, 0.09) inset;
   transform: translateZ(0);
 }
 
@@ -143,8 +143,8 @@
   pointer-events: none;
   z-index: 3;
   opacity: 0;
-  background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 244, 232, 0.18), transparent 38%),
-    radial-gradient(circle at var(--mx) var(--my), rgba(165, 22, 36, 0.2), transparent 58%);
+  background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, 0.18), transparent 38%),
+    radial-gradient(circle at var(--mx) var(--my), rgba(16, 132, 98, 0.15), transparent 58%);
   transition: opacity 0.35s ease;
   mix-blend-mode: soft-light;
 }
@@ -152,8 +152,8 @@
 .mkt-xp-frame.is-hoverable:hover {
   box-shadow:
     0 32px 64px -28px rgba(0, 0, 0, 0.78),
-    0 0 48px -18px rgba(165, 22, 36, 0.38),
-    0 0 0 1px rgba(165, 22, 36, 0.18) inset;
+    0 0 48px -18px rgba(16, 132, 98, 0.285),
+    0 0 0 1px rgba(16, 132, 98, 0.135) inset;
 }
 
 .mkt-xp-frame.is-hoverable:hover::after {
@@ -167,8 +167,8 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.38rem 0.7rem;
-  background: linear-gradient(to bottom, #1a1513, #141110);
-  color: rgba(246, 239, 232, 0.48);
+  background: linear-gradient(to bottom, #161a18, #0f1211);
+  color: rgba(244, 245, 243, 0.48);
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -178,8 +178,8 @@
   width: 0.38rem;
   height: 0.38rem;
   border-radius: 99px;
-  background: #A51624;
-  box-shadow: 0 0 8px rgba(165, 22, 36, 0.7);
+  background: var(--ud-green);
+  box-shadow: 0 0 8px rgba(16, 132, 98, 0.525);
   flex-shrink: 0;
 }
 
@@ -187,7 +187,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  background: #efeae4;
+  background: #f4f5f3;
   aspect-ratio: 16 / 10.2;
   transform: translateZ(0);
 }
@@ -262,7 +262,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(246, 239, 232, 0.7);
+  color: rgba(244, 245, 243, 0.7);
 }
 
 .mkt-xp-layer.is-chip-a .mkt-xp-pane,
@@ -333,7 +333,7 @@
 }
 
 .mkt-xp-track.is-invert .mkt-xp-pin {
-  background: #efeae4;
+  background: #f4f5f3;
 }
 
 .mkt-xp-track.is-dark .mkt-xp-pin {
@@ -346,7 +346,7 @@
 }
 
 .mkt-xp-track.is-dark .mkt-lead {
-  color: rgba(246, 239, 232, 0.68);
+  color: rgba(244, 245, 243, 0.68);
 }
 
 .mkt-xp-chapter {
@@ -410,7 +410,7 @@
 
 .mkt-xp-eco {
   padding: 4.6rem 0 3.4rem;
-  background: #f6f3ef;
+  background: #f4f5f3;
   overflow-x: clip;
 }
 
@@ -503,7 +503,7 @@
 }
 
 .mkt-xp-track.is-cockpit .mkt-xp-pin {
-  background: #080605;
+  background: #070908;
 }
 
 .mkt-cockpit {
@@ -517,7 +517,7 @@
   width: 55%;
   height: 80%;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(165, 22, 36, 0.24), transparent 68%);
+  background: radial-gradient(ellipse at center, rgba(16, 132, 98, 0.18), transparent 68%);
 }
 
 .mkt-cockpit .mkt-xp-copy,
@@ -535,7 +535,7 @@
   position: relative;
   height: 2px;
   max-width: 12rem;
-  background: rgba(246, 239, 232, 0.12);
+  background: rgba(244, 245, 243, 0.12);
   overflow: visible;
 }
 
@@ -550,16 +550,16 @@
 .mkt-cockpit-ticks i {
   width: 1px;
   height: 8px;
-  background: rgba(246, 239, 232, 0.28);
+  background: rgba(244, 245, 243, 0.28);
 }
 
 .mkt-cockpit-fill {
   display: block;
   width: 100%;
   height: 100%;
-  background: #A51624;
+  background: var(--ud-green);
   transform-origin: left center;
-  box-shadow: 0 0 10px rgba(165, 22, 36, 0.7);
+  box-shadow: 0 0 10px rgba(16, 132, 98, 0.525);
 }
 
 .mkt[dir='rtl'] .mkt-cockpit-fill {
@@ -570,9 +570,9 @@
   margin-top: 1.35rem;
   padding: 0.55rem 0.8rem 0.5rem;
   max-width: 16rem;
-  border: 1px solid rgba(246, 239, 232, 0.1);
+  border: 1px solid rgba(244, 245, 243, 0.1);
   border-radius: 8px;
-  background: rgba(8, 6, 5, 0.5);
+  background: rgba(5, 7, 6, 0.5);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
@@ -590,7 +590,7 @@
 }
 
 .mkt-eco-lines line {
-  stroke: rgba(165, 22, 36, 0.3);
+  stroke: rgba(16, 132, 98, 0.225);
   stroke-width: 0.4;
 }
 
@@ -607,12 +607,12 @@
   letter-spacing: -0.02em;
   text-transform: none;
   font-weight: 500;
-  color: #e8b4b0;
+  color: var(--ud-green-light);
 }
 
 .mkt-xp-eco {
   padding: 5.4rem 0 4.2rem;
-  background: #efeae4;
+  background: #f4f5f3;
 }
 
 /* —— Product acts —— */
@@ -628,7 +628,7 @@
   line-height: 0.78;
   font-weight: 500;
   letter-spacing: -0.06em;
-  color: rgba(246, 239, 232, 0.1);
+  color: rgba(244, 245, 243, 0.1);
   margin: 0 0 0.35rem;
 }
 
@@ -651,7 +651,7 @@
 }
 
 .mkt-act-desk {
-  background: #0b0908;
+  background: #070908;
   color: var(--mkt-hero-ink);
   padding: 3.2rem 0 5.6rem;
 }
@@ -663,11 +663,11 @@
 .mkt-act-desk .mkt-lead,
 .mkt-act-desk .mkt-act-aside,
 .mkt-act-desk .mkt-caption {
-  color: rgba(246, 239, 232, 0.62);
+  color: rgba(244, 245, 243, 0.62);
 }
 
 .mkt-act-desk .mkt-kicker {
-  color: #e8b4b0;
+  color: var(--ud-green-light);
 }
 
 .mkt-act-desk-grid {
@@ -747,12 +747,12 @@
 }
 
 .mkt-act-asset {
-  background: #efeae4;
+  background: #f4f5f3;
   padding: 5.2rem 0 5.6rem;
 }
 
 .mkt-act-asset .mkt-act-index {
-  color: rgba(165, 22, 36, 0.18);
+  color: rgba(16, 132, 98, 0.135);
 }
 
 .mkt-act-asset-head {
@@ -910,20 +910,20 @@
 
 .mkt-act-veil.is-bottom {
   bottom: -1px;
-  background: linear-gradient(to bottom, transparent, rgba(165, 22, 36, 0.22), #efeae4);
+  background: linear-gradient(to bottom, transparent, rgba(16, 132, 98, 0.165), #f4f5f3);
 }
 
 .mkt-act-veil.is-top {
   top: -1px;
-  background: linear-gradient(to top, transparent 10%, rgba(165, 22, 36, 0.14), transparent);
+  background: linear-gradient(to top, transparent 10%, rgba(16, 132, 98, 0.105), transparent);
 }
 
 .mkt-act-veil.is-into-dark {
-  background: linear-gradient(to bottom, transparent, rgba(8, 6, 5, 0.45), #080605);
+  background: linear-gradient(to bottom, transparent, rgba(5, 7, 6, 0.45), #070908);
 }
 
 .mkt-act-veil.is-from-dark {
-  background: linear-gradient(to bottom, #080605, rgba(165, 22, 36, 0.16), transparent);
+  background: linear-gradient(to bottom, #070908, rgba(16, 132, 98, 0.12), transparent);
 }
 
 .mkt-xp-track.is-cockpit::before {
@@ -934,7 +934,7 @@
   height: 4.8rem;
   pointer-events: none;
   z-index: 2;
-  background: linear-gradient(to bottom, #efeae4, transparent);
+  background: linear-gradient(to bottom, #f4f5f3, transparent);
 }
 
 .mkt-xp-eco-s .mkt-xp-frame {
