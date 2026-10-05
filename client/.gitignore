@@ -13,11 +13,6 @@ dist-ssr
 .env
 .env.local
 *.local
-ga-debug
-ga-debug-*
-prod_index.js
-cars.json
-*-lighthouse-*.json
 
 # Editor directories and files
 .vscode/*

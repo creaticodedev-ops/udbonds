@@ -1,23 +1,2 @@
-# https://hdncar.com/robots.txt
 User-agent: *
 Allow: /
-
-# Staff / admin portals
-Disallow: /owner
-Disallow: /owner/
-Disallow: /superadmin
-Disallow: /superadmin/
-Disallow: /admin
-Disallow: /admin/
-
-# Private tokenized booking / confirmation flows
-Disallow: /complete-booking
-Disallow: /complete-booking/
-Disallow: /booking-confirmation
-Disallow: /booking-confirmation/
-
-# API (same-origin proxy or accidental exposure)
-Disallow: /api
-Disallow: /api/
-
-Sitemap: https://hdncar.com/sitemap.xml
