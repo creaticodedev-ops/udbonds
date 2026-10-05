@@ -1,8 +1,8 @@
 export const fr = {
   meta: {
-    title: 'U.D.Bonds — Trading de l’or, investissement et analyse de marché',
+    title: 'US Bonds — Trading de l’or, investissement et analyse de marché',
     description:
-      'U.D.Bonds est une société spécialisée dans le trading de l’or, les opportunités d’investissement, la formation au trading et l’analyse des marchés financiers.',
+      'US Bonds est une société spécialisée dans le trading de l’or, les opportunités d’investissement, la formation au trading et l’analyse des marchés financiers.',
   },
   common: {
     illustration: 'Illustration',
@@ -22,24 +22,30 @@ export const fr = {
     close: 'Fermer le menu',
     menu: 'Menu',
     language: 'Langue',
-    homeLink: 'U.D.Bonds — accueil',
+    homeLink: 'US Bonds — accueil',
   },
   hero: {
     eyebrow: 'Trading de l’or · Investissement · Formation',
     titleA: 'L’or, négocié avec précision.',
     titleB: 'Le capital, construit avec discipline.',
     lead:
-      'U.D.Bonds réunit trading de l’or, opportunités d’investissement, formation et analyse de marché dans une approche structurée, transparente et consciente du risque.',
+      'US Bonds réunit trading de l’or, opportunités d’investissement, formation et analyse de marché dans une approche structurée, transparente et consciente du risque.',
     ctaPrimary: 'Découvrir nos offres',
     ctaSecondary: 'En savoir plus',
     pillars: ['Spécialiste de l’or (XAU)', 'Approche structurée', 'Gestion du risque'],
     visual: 'Illustration abstraite d’un mouvement de marché',
     scroll: 'Défiler',
+    statement: 'Lire le marché. Décider avec méthode.',
+    hud: {
+      illustrative: 'Visualisation illustrative',
+      london: 'Londres',
+      newYork: 'New York',
+    },
   },
   intro: {
     kicker: 'À propos',
     statement:
-      'U.D.Bonds est une société dédiée au trading de l’or et aux marchés financiers. Nous associons analyse, stratégie et formation pour aborder les marchés avec méthode.',
+      'US Bonds est une société dédiée au trading de l’or et aux marchés financiers. Nous associons analyse, stratégie et formation pour aborder les marchés avec méthode.',
     items: [
       { title: 'Expertise des marchés', text: 'Une lecture attentive des marchés, avec l’or comme spécialité.' },
       { title: 'Stratégie', text: 'Des décisions guidées par un cadre clair, jamais par l’impulsion.' },
@@ -138,7 +144,7 @@ export const fr = {
     },
   },
   why: {
-    kicker: 'Pourquoi U.D.Bonds',
+    kicker: 'Pourquoi US Bonds',
     title: 'Une approche exigeante, pensée pour durer.',
     items: [
       {
@@ -159,7 +165,7 @@ export const fr = {
     kicker: 'Comment ça marche',
     title: 'Trois étapes pour commencer.',
     steps: [
-      { title: 'Découvrir U.D.Bonds', text: 'Comprenez notre approche, nos activités et notre vision des marchés.' },
+      { title: 'Découvrir US Bonds', text: 'Comprenez notre approche, nos activités et notre vision des marchés.' },
       {
         title: 'Explorer nos opportunités',
         text: 'Parcourez nos niveaux d’offres et identifiez celui qui correspond à vos objectifs.',
@@ -210,9 +216,9 @@ export const fr = {
       'Le trading et l’investissement sur les marchés financiers, y compris sur l’or, comportent un risque de perte en capital. Les performances passées ne préjugent pas des performances futures.',
   },
   final: {
-    kicker: 'U.D.Bonds',
+    kicker: 'US Bonds',
     title: 'Votre prochaine décision commence ici.',
-    lead: 'Découvrez nos offres et la manière dont U.D.Bonds aborde les marchés.',
+    lead: 'Découvrez nos offres et la manière dont US Bonds aborde les marchés.',
     ctaPrimary: 'Découvrir les offres',
     ctaSecondary: 'Nous contacter',
   },
@@ -223,7 +229,7 @@ export const fr = {
     contactTitle: 'Contact',
     legalTitle: 'Informations légales',
     company: {
-      why: 'Pourquoi U.D.Bonds',
+      why: 'Pourquoi US Bonds',
       how: 'Comment ça marche',
       approach: 'Notre engagement',
       services: 'Nos activités',
@@ -238,7 +244,7 @@ export const fr = {
     riskTitle: 'Avertissement sur les risques',
     riskText:
       'Le trading et l’investissement sur les marchés financiers, y compris l’or, comportent un risque élevé de perte en capital et ne conviennent pas à tous les profils. Les performances passées ne préjugent pas des performances futures. Les contenus de ce site sont fournis à titre informatif et ne constituent ni un conseil en investissement, ni une offre ou une sollicitation d’achat ou de vente d’instruments financiers.',
-    rights: '© {{year}} U.D.Bonds. Tous droits réservés.',
+    rights: '© {{year}} US Bonds. Tous droits réservés.',
     backToTop: 'Retour en haut',
     language: 'Langue',
   },

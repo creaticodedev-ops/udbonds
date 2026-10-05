@@ -45,7 +45,7 @@ export const Footer = () => {
   return (
     <footer className="foot" aria-labelledby="foot-title">
       <h2 id="foot-title" className="sr-only">
-        U.D.Bonds
+        US Bonds
       </h2>
       <div className="container">
         <div className="foot-top">

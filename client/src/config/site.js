@@ -5,7 +5,7 @@ const env = import.meta.env
  * empty fields are simply not rendered (nothing is invented).
  */
 export const SITE = {
-  name: 'U.D.Bonds',
+  name: 'US Bonds',
   url: env.VITE_SITE_URL || '',
   contact: {
     email: env.VITE_CONTACT_EMAIL || '',

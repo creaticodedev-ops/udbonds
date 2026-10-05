@@ -1,5 +1,5 @@
 /**
- * Builds web-ready brand assets from the official U.D.Bonds logo.
+ * Builds web-ready brand assets from the official US Bonds logo.
  * The logo artwork itself is never altered: assets are only trimmed of
  * transparent padding, resized, or (for icons) cropped to the "UD" mark.
  *
@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const source = path.resolve(process.argv[2] || path.join(root, 'brand/udbonds-logo-official.png'))
+const source = path.resolve(process.argv[2] || path.join(root, 'brand/usbonds-logo-official.png'))
 const brandOut = path.join(root, 'src/assets/brand')
 const publicOut = path.join(root, 'public')
 const BLACK = { r: 5, g: 6, b: 5, alpha: 1 }
@@ -48,9 +48,9 @@ const full = {
 const mark = { left, top, width: markRight - left + 1, height: bottom - top + 1 }
 
 const logo = sharp(source).extract(full)
-await logo.clone().png({ compressionLevel: 9 }).toFile(path.join(brandOut, 'udbonds-logo.png'))
-await logo.clone().webp({ quality: 90, alphaQuality: 100 }).toFile(path.join(brandOut, 'udbonds-logo.webp'))
-await logo.clone().resize({ height: 96 }).webp({ quality: 90, alphaQuality: 100 }).toFile(path.join(brandOut, 'udbonds-logo-96.webp'))
+await logo.clone().png({ compressionLevel: 9 }).toFile(path.join(brandOut, 'usbonds-logo.png'))
+await logo.clone().webp({ quality: 90, alphaQuality: 100 }).toFile(path.join(brandOut, 'usbonds-logo.webp'))
+await logo.clone().resize({ height: 96 }).webp({ quality: 90, alphaQuality: 100 }).toFile(path.join(brandOut, 'usbonds-logo-96.webp'))
 
 const icon = async (size, file, padding = 0.14) => {
   const inner = Math.round(size * (1 - padding * 2))

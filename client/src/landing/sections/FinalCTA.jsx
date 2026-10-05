@@ -21,7 +21,7 @@ export const FinalCTA = () => {
           <ButtonLink href="#offers" arrow>
             {t('final.ctaPrimary')}
           </ButtonLink>
-          <ButtonLink href={contactHref('U.D.Bonds')} variant="ghost">
+          <ButtonLink href={contactHref('US Bonds')} variant="ghost">
             {t('final.ctaSecondary')}
           </ButtonLink>
         </div>

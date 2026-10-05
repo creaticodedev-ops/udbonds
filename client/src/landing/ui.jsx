@@ -1,17 +1,17 @@
-import logoWebp from '../assets/brand/udbonds-logo-96.webp'
-import logoPng from '../assets/brand/udbonds-logo.png'
+import logoWebp from '../assets/brand/usbonds-logo-96.webp'
+import logoPng from '../assets/brand/usbonds-logo.png'
 import { useI18n } from '../i18n/I18nProvider'
 import { LOCALES } from '../i18n/locales'
 
-/** Official logo — rendered as-is (white "U.D." is designed for dark surfaces). */
+/** Official logo — rendered as-is, never recoloured or redrawn. */
 export const Logo = ({ className = '', eager = false }) => (
   <picture className={`logo ${className}`.trim()}>
     <source type="image/webp" srcSet={logoWebp} />
     <img
       src={logoPng}
-      alt="U.D.Bonds"
-      width="572"
-      height="127"
+      alt="US Bonds"
+      width="500"
+      height="129"
       decoding="async"
       fetchPriority={eager ? 'high' : 'auto'}
       loading={eager ? 'eager' : 'lazy'}

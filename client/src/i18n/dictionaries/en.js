@@ -1,8 +1,8 @@
 export const en = {
   meta: {
-    title: 'U.D.Bonds — Gold trading, investment and market analysis',
+    title: 'US Bonds — Gold trading, investment and market analysis',
     description:
-      'U.D.Bonds is a company focused on gold trading, investment opportunities, trading education and financial market analysis.',
+      'US Bonds is a company focused on gold trading, investment opportunities, trading education and financial market analysis.',
   },
   common: {
     illustration: 'Illustration',
@@ -22,24 +22,30 @@ export const en = {
     close: 'Close menu',
     menu: 'Menu',
     language: 'Language',
-    homeLink: 'U.D.Bonds — home',
+    homeLink: 'US Bonds — home',
   },
   hero: {
     eyebrow: 'Gold trading · Investment · Education',
     titleA: 'Gold, traded with precision.',
     titleB: 'Capital, built with discipline.',
     lead:
-      'U.D.Bonds brings together gold trading, investment opportunities, trading education and market analysis in one structured, transparent and risk-aware approach.',
+      'US Bonds brings together gold trading, investment opportunities, trading education and market analysis in one structured, transparent and risk-aware approach.',
     ctaPrimary: 'Explore our offers',
     ctaSecondary: 'Learn more',
     pillars: ['Gold (XAU) specialists', 'Structured approach', 'Risk management'],
     visual: 'Abstract illustration of market movement',
     scroll: 'Scroll',
+    statement: 'Read the market. Decide with method.',
+    hud: {
+      illustrative: 'Illustrative visualisation',
+      london: 'London',
+      newYork: 'New York',
+    },
   },
   intro: {
     kicker: 'About',
     statement:
-      'U.D.Bonds is a company dedicated to gold trading and financial markets. We combine analysis, strategy and education to approach markets with method.',
+      'US Bonds is a company dedicated to gold trading and financial markets. We combine analysis, strategy and education to approach markets with method.',
     items: [
       { title: 'Market expertise', text: 'A careful reading of the markets, with gold as our specialty.' },
       { title: 'Strategy', text: 'Decisions guided by a clear framework, never by impulse.' },
@@ -137,7 +143,7 @@ export const en = {
     },
   },
   why: {
-    kicker: 'Why U.D.Bonds',
+    kicker: 'Why US Bonds',
     title: 'A demanding approach, built to last.',
     items: [
       { title: 'Disciplined approach', text: 'Clear rules, applied consistently, whatever the market conditions.' },
@@ -152,7 +158,7 @@ export const en = {
     kicker: 'How it works',
     title: 'Three steps to begin.',
     steps: [
-      { title: 'Discover U.D.Bonds', text: 'Understand our approach, our activities and our view of the markets.' },
+      { title: 'Discover US Bonds', text: 'Understand our approach, our activities and our view of the markets.' },
       { title: 'Explore our opportunities', text: 'Browse our offer levels and identify the one that fits your goals.' },
       { title: 'Start your journey', text: 'Get in touch with us to discuss your project.' },
     ],
@@ -200,9 +206,9 @@ export const en = {
       'Trading and investing in financial markets, including gold, carries a risk of capital loss. Past performance is not a reliable indicator of future results.',
   },
   final: {
-    kicker: 'U.D.Bonds',
+    kicker: 'US Bonds',
     title: 'Your next decision starts here.',
-    lead: 'Discover our offers and the way U.D.Bonds approaches the markets.',
+    lead: 'Discover our offers and the way US Bonds approaches the markets.',
     ctaPrimary: 'Explore the offers',
     ctaSecondary: 'Contact us',
   },
@@ -213,7 +219,7 @@ export const en = {
     contactTitle: 'Contact',
     legalTitle: 'Legal',
     company: {
-      why: 'Why U.D.Bonds',
+      why: 'Why US Bonds',
       how: 'How it works',
       approach: 'Our commitment',
       services: 'What we do',
@@ -228,7 +234,7 @@ export const en = {
     riskTitle: 'Risk warning',
     riskText:
       'Trading and investing in financial markets, including gold, carries a high risk of capital loss and is not suitable for every profile. Past performance is not a reliable indicator of future results. The content of this website is provided for information only and constitutes neither investment advice nor an offer or solicitation to buy or sell financial instruments.',
-    rights: '© {{year}} U.D.Bonds. All rights reserved.',
+    rights: '© {{year}} US Bonds. All rights reserved.',
     backToTop: 'Back to top',
     language: 'Language',
   },

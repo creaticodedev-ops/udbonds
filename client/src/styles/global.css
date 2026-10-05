@@ -1,4 +1,4 @@
-/* U.D.Bonds design system — black (authority) · white (clarity) · green (opportunity) */
+/* US Bonds design system — black (authority) · white (clarity) · green (opportunity) */
 
 :root {
   --black: #050605;
@@ -75,6 +75,7 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
+  overflow-x: clip;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);

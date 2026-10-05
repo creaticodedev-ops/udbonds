@@ -12,7 +12,7 @@ import { Intro } from './sections/Intro'
 import { MarketSection } from './sections/MarketSection'
 import { OffersPreview } from './sections/OffersPreview'
 import { Services } from './sections/Services'
-import { WhyUDBonds } from './sections/WhyUDBonds'
+import { WhyUSBonds } from './sections/WhyUSBonds'
 import './landing.css'
 
 export const LandingPage = () => {
@@ -29,7 +29,7 @@ export const LandingPage = () => {
         <OffersPreview />
         <CapitalSection />
         <MarketSection />
-        <WhyUDBonds />
+        <WhyUSBonds />
         <InsightsPreview />
         <HowItWorks />
         <Approach />

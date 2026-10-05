@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const prefersReducedMotion = () =>
+export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /** Adds `.is-in` to every `[data-reveal]` element once it enters the viewport. Re-scans when `rescanKey` changes. */
@@ -52,25 +52,36 @@ export const useActiveSection = (ids) => {
   return active
 }
 
-/** Writes scroll progress through `ref` (0 → 1) into the `--progress` CSS variable. */
-export const useScrollProgress = (ref) => {
+/**
+ * Measures scroll progress through `ref` (0 → 1) and hands it to `onProgress`.
+ * In the pinned layout the range is the section's extra height; otherwise its full height.
+ */
+export const usePinnedProgress = (ref, onProgress) => {
+  const callback = useRef(onProgress)
+  useEffect(() => {
+    callback.current = onProgress
+  })
+
   useEffect(() => {
     const el = ref.current
     if (!el || prefersReducedMotion()) return undefined
     let frame = 0
     const update = () => {
       frame = 0
-      const height = el.offsetHeight || 1
-      const progress = Math.min(1, Math.max(0, window.scrollY / height))
-      el.style.setProperty('--progress', progress.toFixed(3))
+      const extra = el.offsetHeight - window.innerHeight
+      const range = extra > 100 ? extra : el.offsetHeight || 1
+      const progress = Math.min(1, Math.max(0, -el.getBoundingClientRect().top / range))
+      callback.current?.(progress)
     }
-    const onScroll = () => {
+    const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
     }
     update()
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
     return () => {
-      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
       if (frame) cancelAnimationFrame(frame)
     }
   }, [ref])

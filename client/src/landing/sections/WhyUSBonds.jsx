@@ -1,7 +1,7 @@
 import { useI18n } from '../../i18n/I18nProvider'
 import { SectionIntro } from '../ui'
 
-export const WhyUDBonds = () => {
+export const WhyUSBonds = () => {
   const { t, tm } = useI18n()
   const items = tm('why.items') || []
 
@@ -23,4 +23,4 @@ export const WhyUDBonds = () => {
   )
 }
 
-export default WhyUDBonds
+export default WhyUSBonds

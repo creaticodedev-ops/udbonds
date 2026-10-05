@@ -1,6 +1,6 @@
-# U.D.Bonds
+# US Bonds
 
-Website for U.D.Bonds — gold trading, investment opportunities, trading education and market analysis.
+Website for US Bonds — gold trading, investment opportunities, trading education and market analysis.
 
 **Phase 1:** public landing page only (no accounts, dashboards, payments or business logic). Local development only.
 
@@ -53,4 +53,4 @@ The `udbonds` database appears in MongoDB Compass once the first document is wri
 - Translations: `client/src/i18n/dictionaries/{fr,en,ar}.js`
 - Offer levels (placeholders, no figures): `client/src/config/offers.js`
 - Landing sections: `client/src/landing/sections/`
-- Brand assets: `npm run brand:assets --prefix client` regenerates the trimmed logo, favicons and social image from `client/brand/udbonds-logo-official.png`
+- Brand assets: `npm run brand:assets --prefix client` regenerates the trimmed logo, favicons and social image from `client/brand/usbonds-logo-official.png`

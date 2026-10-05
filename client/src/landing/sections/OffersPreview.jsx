@@ -54,7 +54,7 @@ export const OffersPreview = () => {
                 </ul>
                 <a
                   className={`btn ${offer.featured ? 'btn-primary' : 'btn-ghost'} btn-block`}
-                  href={contactHref(`U.D.Bonds — ${copy.name}`)}
+                  href={contactHref(`US Bonds — ${copy.name}`)}
                 >
                   <span>{t('offers.cta')}</span>
                   <ArrowIcon />

@@ -24,7 +24,7 @@ app.use((err, _req, res, _next) => {
 await connectDB()
 
 const server = app.listen(PORT, HOST, () => {
-  console.log(`[api] U.D.Bonds API listening on http://${HOST}:${PORT}`)
+  console.log(`[api] US Bonds API listening on http://${HOST}:${PORT}`)
 })
 
 const shutdown = async () => {
