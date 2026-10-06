@@ -1,11 +1,12 @@
-import { contactHref } from '../../config/site'
 import { OFFERS, formatCapital } from '../../config/offers'
 import { useI18n } from '../../i18n/I18nProvider'
 import { getLocaleMeta } from '../../i18n/locales'
+import { useOverlay } from '../overlays/context'
 import { ArrowIcon, CheckIcon, SectionIntro } from '../ui'
 
 export const OffersPreview = () => {
   const { t, tm, locale } = useI18n()
+  const { openRegistration } = useOverlay()
   const intlLocale = getLocaleMeta(locale).htmlLang
 
   return (
@@ -52,18 +53,18 @@ export const OffersPreview = () => {
                     </li>
                   ))}
                 </ul>
-                <a
+                <button
+                  type="button"
                   className={`btn ${offer.featured ? 'btn-primary' : 'btn-ghost'} btn-block`}
-                  href={contactHref(`US Bonds — ${copy.name}`)}
+                  onClick={() => openRegistration(offer.id)}
                 >
                   <span>{t('offers.cta')}</span>
                   <ArrowIcon />
-                </a>
+                </button>
               </li>
             )
           })}
         </ul>
-        <p className="fine-print offers-disclaimer">{t('offers.disclaimer')}</p>
       </div>
     </section>
   )

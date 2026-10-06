@@ -87,18 +87,10 @@ export const Footer = () => {
           <div className="foot-col">
             <h3>{t('footer.legalTitle')}</h3>
             <ul className="foot-list">
-              <li>
-                <a href="#risk">{t('footer.riskLink')}</a>
-              </li>
               <li className="foot-muted">{t('footer.legalSoon')}</li>
             </ul>
           </div>
         </div>
-
-        <section className="foot-risk" id="risk" aria-labelledby="risk-title">
-          <h3 id="risk-title">{t('footer.riskTitle')}</h3>
-          <p>{t('footer.riskText')}</p>
-        </section>
 
         <div className="foot-bottom">
           <p>{t('footer.rights', { year })}</p>

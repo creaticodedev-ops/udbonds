@@ -22,7 +22,7 @@ export const CapitalSection = () => {
           {terms.map((term, index) => (
             <li
               key={index}
-              className={`term${index === terms.length - 1 ? ' is-result' : ''}`}
+              className={`equation-term${index === terms.length - 1 ? ' is-result' : ''}`}
               data-reveal
               style={{ '--d': index }}
               data-op={OPERATORS[index]}

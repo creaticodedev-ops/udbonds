@@ -574,6 +574,51 @@ html[lang='ar'] .intro-statement {
   font-size: 0.9375rem;
 }
 
+.service.is-action {
+  cursor: pointer;
+}
+
+.service.is-action:hover {
+  background: linear-gradient(180deg, rgba(0, 154, 90, 0.07), transparent 75%);
+}
+
+.service-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--green-bright);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.service-action::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.service-action:hover .icon-arrow {
+  transform: translateX(3px);
+}
+
+[dir='rtl'] .service-action:hover .icon-arrow {
+  transform: scaleX(-1) translateX(3px);
+}
+
+.service-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  animation: live-pulse 2.4s var(--ease) infinite;
+}
+
 @media (min-width: 640px) {
   .services-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -632,16 +677,36 @@ html[lang='ar'] .intro-statement {
 }
 
 .gold {
+  --neg: #d4776e;
+
   position: relative;
+  display: block;
   width: min(100%, 440px);
   aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.gold-dial {
+.gold:focus-visible {
+  outline-offset: 6px;
+}
+
+.gold-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
+}
+
+.gold-dial {
+  transform-origin: 200px 200px;
   animation: spin 160s linear infinite;
 }
 
@@ -662,59 +727,176 @@ html[lang='ar'] .intro-statement {
   stroke: rgba(255, 255, 255, 0.5);
 }
 
+.gold-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
 .gold-arc {
   fill: none;
   stroke: var(--green-bright);
   stroke-width: 2;
   stroke-linecap: round;
+  transition: d 0.8s var(--ease);
 }
 
-.gold-tile {
+.gold-marker {
+  transition: transform 0.8s var(--ease);
+}
+
+.gold-marker circle {
+  fill: var(--white);
+}
+
+.gold-marker .gold-marker-halo {
+  fill: rgba(34, 181, 115, 0.18);
+  stroke: rgba(34, 181, 115, 0.6);
+}
+
+.gold-face {
   position: absolute;
-  inset: 27%;
-  display: grid;
-  grid-template-rows: auto 1fr auto auto;
-  padding: 8%;
+  inset: 24%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: linear-gradient(160deg, var(--surface-2), var(--black) 75%);
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
-  direction: ltr;
+  border-radius: 50%;
+  background: radial-gradient(120% 120% at 30% 20%, var(--surface-2), var(--black) 70%);
+  box-shadow:
+    0 40px 80px -40px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  text-align: center;
+  transition:
+    border-color 0.4s var(--ease),
+    transform 0.6s var(--ease);
 }
 
-.gold-number {
-  color: var(--green-bright);
-  font-size: clamp(0.75rem, 0.6rem + 0.5vw, 0.9375rem);
+.gold:hover .gold-face {
+  border-color: rgba(34, 181, 115, 0.45);
+  transform: scale(1.015);
+}
+
+.gold-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: clamp(0.625rem, 0.55rem + 0.3vw, 0.75rem);
   font-weight: 600;
+  letter-spacing: 0.16em;
 }
 
-.gold-symbol {
-  align-self: center;
+.gold-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.gold.is-live .gold-live {
+  background: var(--green-bright);
+  box-shadow: 0 0 0 0 rgba(34, 181, 115, 0.5);
+  animation: live-pulse 2.4s var(--ease) infinite;
+}
+
+.gold-price {
+  margin-top: 6px;
   color: var(--white);
   font-family: var(--font-display);
-  font-size: clamp(3rem, 2rem + 4vw, 4.75rem);
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 2.75rem);
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  text-align: center;
-}
-
-.gold-name {
-  color: var(--text-muted);
-  font-size: clamp(0.75rem, 0.65rem + 0.4vw, 0.875rem);
-  text-align: center;
-}
-
-html[lang='ar'] .gold-name {
-  font-family: var(--font-arabic);
-}
-
-.gold-mass {
-  margin-top: 2px;
-  color: var(--text-dim);
-  font-size: clamp(0.625rem, 0.55rem + 0.3vw, 0.75rem);
   font-variant-numeric: tabular-nums;
-  text-align: center;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.gold-price.is-up {
+  animation: tick-up 1.4s var(--ease);
+}
+
+.gold-price.is-down {
+  animation: tick-down 1.4s var(--ease);
+}
+
+.gold-unit {
+  color: var(--text-dim);
+  font-size: clamp(0.625rem, 0.55rem + 0.25vw, 0.75rem);
+  letter-spacing: 0.08em;
+}
+
+.gold-change {
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: clamp(0.6875rem, 0.6rem + 0.3vw, 0.8125rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.gold-change.is-up {
+  color: var(--green-bright);
+}
+
+.gold-change.is-down {
+  color: var(--neg);
+}
+
+.gold-range {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: clamp(0.5625rem, 0.5rem + 0.2vw, 0.6875rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.markets-art {
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.markets-live-caption {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-dim);
+  font-size: 0.8125rem;
+}
+
+.markets-live-caption i {
+  width: 18px;
+  height: 1px;
+  background: var(--green-bright);
+}
+
+.markets-cta {
+  margin-top: 36px;
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 181, 115, 0.45);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px rgba(34, 181, 115, 0);
+  }
+}
+
+@keyframes tick-up {
+  from {
+    color: var(--green-bright);
+  }
+}
+
+@keyframes tick-down {
+  from {
+    color: var(--neg, #d4776e);
+  }
 }
 
 .drivers {
@@ -740,10 +922,6 @@ html[lang='ar'] .gold-name {
   font-size: 0.9375rem;
 }
 
-.markets .fine-print {
-  margin-top: 24px;
-}
-
 @media (min-width: 560px) {
   .drivers {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -765,7 +943,7 @@ html[lang='ar'] .gold-name {
   margin-top: clamp(48px, 7vw, 72px);
 }
 
-.term {
+.equation-term {
   position: relative;
   padding: 28px;
   border: 1px solid var(--line);
@@ -773,7 +951,7 @@ html[lang='ar'] .gold-name {
   background: var(--surface);
 }
 
-.term h3 {
+.equation-term h3 {
   color: var(--text-strong);
   font-family: var(--font-display);
   font-size: 1.375rem;
@@ -781,18 +959,18 @@ html[lang='ar'] .gold-name {
   letter-spacing: -0.01em;
 }
 
-.term p {
+.equation-term p {
   margin-top: 10px;
   color: var(--text-muted);
   font-size: 0.9375rem;
 }
 
-.term.is-result {
+.equation-term.is-result {
   border-color: rgba(34, 181, 115, 0.4);
   background: linear-gradient(160deg, rgba(0, 154, 90, 0.14), var(--surface) 70%);
 }
 
-.term.is-result h3 {
+.equation-term.is-result h3 {
   color: var(--green-bright);
 }
 
@@ -1105,10 +1283,6 @@ html[lang='ar'] .offer-capital dt {
   margin-bottom: 32px;
 }
 
-.offers-disclaimer {
-  margin-top: 28px;
-}
-
 @media (min-width: 900px) {
   .offers-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1224,10 +1398,6 @@ html[lang='ar'] .offer-capital dt {
   margin-top: 10px;
   color: var(--text-muted);
   font-size: 0.9375rem;
-}
-
-.how-note {
-  margin-top: 48px;
 }
 
 @media (min-width: 860px) {
@@ -1391,30 +1561,6 @@ html[lang='ar'] .offer-capital dt {
 .approach-item dd {
   color: var(--text-muted);
   font-size: 0.9375rem;
-}
-
-.risk-note {
-  margin-top: 32px;
-  padding: 24px;
-  border-inline-start: 2px solid var(--green-ink);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  background: var(--bg-raised);
-}
-
-[dir='rtl'] .risk-note {
-  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-}
-
-.risk-note h3 {
-  color: var(--text-strong);
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-
-.risk-note p {
-  margin-top: 8px;
-  color: var(--text-muted);
-  font-size: 0.875rem;
 }
 
 @media (min-width: 640px) {
@@ -1591,25 +1737,6 @@ html[lang='ar'] .foot-col h3 {
   margin-top: 0;
 }
 
-.foot-risk {
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.foot-risk h3 {
-  color: var(--text-strong);
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.foot-risk p {
-  margin-top: 8px;
-  color: var(--text-dim);
-  font-size: 0.8125rem;
-  line-height: 1.65;
-}
-
 .foot-bottom {
   display: flex;
   flex-wrap: wrap;
@@ -1640,7 +1767,9 @@ html[lang='ar'] .foot-col h3 {
 /* ───────────────────────── Reduced motion ───────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .gold-dial {
+  .gold-dial,
+  .gold-live,
+  .service-live {
     animation: none !important;
   }
 }

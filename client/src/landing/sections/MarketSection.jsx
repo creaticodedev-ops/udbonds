@@ -1,23 +1,34 @@
 import { useI18n } from '../../i18n/I18nProvider'
-import { getLocaleMeta } from '../../i18n/locales'
-import { GoldElement } from '../visuals/GoldElement'
+import { useGoldQuote } from '../../market/goldQuote'
+import { useOverlay } from '../overlays/context'
+import { ArrowIcon } from '../ui'
+import { GoldQuoteDial } from '../visuals/GoldQuoteDial'
 
 export const MarketSection = () => {
   const { t, tm, locale } = useI18n()
+  const { openTerminal } = useOverlay()
+  const { status } = useGoldQuote()
   const drivers = tm('markets.drivers') || []
-  const mass = new Intl.NumberFormat(getLocaleMeta(locale).htmlLang, { minimumFractionDigits: 3 }).format(196.967)
 
   return (
     <section className="section markets" id="markets" aria-labelledby="markets-title">
       <div className="container markets-grid">
         <div className="markets-art" data-reveal>
-          <GoldElement
-            name={t('markets.element.name')}
-            numberLabel={t('markets.element.number')}
-            massLabel={t('markets.element.mass')}
-            mass={mass}
-            label={t('markets.element.label')}
+          <GoldQuoteDial
+            locale={locale}
+            onOpen={openTerminal}
+            labels={{
+              open: t('markets.live.open'),
+              unit: t('markets.live.unit'),
+              low: t('markets.live.low'),
+              high: t('markets.live.high'),
+              status: t(`terminal.status.${status}`),
+            }}
           />
+          <p className="markets-live-caption">
+            <i aria-hidden="true" />
+            {t('markets.live.caption')}
+          </p>
         </div>
         <div className="markets-copy">
           <header className="section-intro" data-reveal>
@@ -35,7 +46,10 @@ export const MarketSection = () => {
               </li>
             ))}
           </ul>
-          <p className="fine-print">{t('markets.note')}</p>
+          <button type="button" className="btn btn-ghost markets-cta" onClick={openTerminal} data-reveal>
+            <span>{t('markets.live.cta')}</span>
+            <ArrowIcon />
+          </button>
         </div>
       </div>
     </section>

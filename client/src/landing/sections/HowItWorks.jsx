@@ -18,7 +18,6 @@ export const HowItWorks = () => {
             </li>
           ))}
         </ol>
-        <p className="fine-print how-note">{t('how.note')}</p>
       </div>
     </section>
   )
