@@ -404,6 +404,9 @@ export const fr = {
     firstName: 'Prénom',
     lastName: 'Nom',
     city: 'Ville',
+    email: 'E-mail',
+    phone: 'Numéro WhatsApp',
+    phoneHint: '+212 6 12 34 56 78',
     amount: 'Montant d’investissement',
     duration: 'Durée',
     durations: { '15d': '15 jours', '1m': '1 mois' },
@@ -412,6 +415,8 @@ export const fr = {
     errors: {
       required: 'Champ requis',
       amount: 'Saisissez un montant valide',
+      email: 'Saisissez une adresse e-mail valide',
+      phone: 'Saisissez un numéro valide avec l’indicatif du pays (ex. +212…)',
       server: 'Envoi impossible pour le moment. Réessayez dans un instant.',
       rate: 'Trop de demandes. Réessayez dans quelques minutes.',
     },
@@ -448,6 +453,8 @@ export const fr = {
     legalSoon: 'Mentions légales et politique de confidentialité : bientôt disponibles.',
     rights: '© {{year}} US Bonds. Tous droits réservés.',
     backToTop: 'Retour en haut',
+    admin: 'Admin Panel',
+    adminLabel: 'Espace administrateur (accès protégé)',
     language: 'Langue',
   },
 }

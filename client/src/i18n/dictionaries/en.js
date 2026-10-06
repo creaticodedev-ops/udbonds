@@ -393,6 +393,9 @@ export const en = {
     firstName: 'First name',
     lastName: 'Last name',
     city: 'City',
+    email: 'Email',
+    phone: 'WhatsApp number',
+    phoneHint: '+212 6 12 34 56 78',
     amount: 'Investment amount',
     duration: 'Duration',
     durations: { '15d': '15 days', '1m': '1 month' },
@@ -401,6 +404,8 @@ export const en = {
     errors: {
       required: 'Required field',
       amount: 'Enter a valid amount',
+      email: 'Enter a valid email address',
+      phone: 'Enter a valid number including the country code (e.g. +212…)',
       server: 'Unable to send right now. Please try again in a moment.',
       rate: 'Too many requests. Please try again in a few minutes.',
     },
@@ -437,6 +442,8 @@ export const en = {
     legalSoon: 'Legal notice and privacy policy: coming soon.',
     rights: '© {{year}} US Bonds. All rights reserved.',
     backToTop: 'Back to top',
+    admin: 'Admin Panel',
+    adminLabel: 'Administrator area (protected access)',
     language: 'Language',
   },
 }

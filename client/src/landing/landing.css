@@ -1752,6 +1752,54 @@ html[lang='ar'] .foot-col h3 {
   color: var(--white);
 }
 
+.foot-bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 22px;
+}
+
+.foot-admin {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    background-color 0.25s var(--ease);
+}
+
+.foot-admin svg {
+  transition: color 0.25s var(--ease);
+}
+
+.foot-bottom .foot-admin:hover,
+.foot-admin:focus-visible {
+  border-color: rgba(34, 181, 115, 0.45);
+  background: rgba(0, 154, 90, 0.07);
+  color: var(--white);
+}
+
+.foot-admin:hover svg,
+.foot-admin:focus-visible svg {
+  color: var(--green-bright);
+}
+
+html[lang='ar'] .foot-admin {
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 @media (min-width: 560px) {
   .foot-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

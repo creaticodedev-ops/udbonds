@@ -94,7 +94,16 @@ export const Footer = () => {
 
         <div className="foot-bottom">
           <p>{t('footer.rights', { year })}</p>
-          <a href="#top">{t('footer.backToTop')}</a>
+          <div className="foot-bottom-links">
+            <a href="/admin" className="foot-admin" rel="nofollow" title={t('footer.adminLabel')}>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <rect x="2.25" y="5.25" width="7.5" height="5.25" rx="1.25" stroke="currentColor" strokeWidth="1.1" />
+                <path d="M4 5.25V3.75a2 2 0 0 1 4 0v1.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+              </svg>
+              <span>{t('footer.admin')}</span>
+            </a>
+            <a href="#top">{t('footer.backToTop')}</a>
+          </div>
         </div>
       </div>
     </footer>

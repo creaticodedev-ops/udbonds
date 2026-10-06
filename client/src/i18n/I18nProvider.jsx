@@ -12,7 +12,8 @@ const setMeta = (selector, attr, value) => {
   if (el) el.setAttribute(attr, value)
 }
 
-export const I18nProvider = ({ children }) => {
+/** `titleKey={null}` leaves the document title and meta tags to the page (used by the admin area). */
+export const I18nProvider = ({ children, titleKey = 'meta.title' }) => {
   const [locale, setLocaleState] = useState(readInitialLocale)
   const meta = getLocaleMeta(locale)
 
@@ -42,12 +43,13 @@ export const I18nProvider = ({ children }) => {
     const html = document.documentElement
     html.lang = meta.htmlLang
     html.dir = meta.dir
-    document.title = value.t('meta.title')
+    if (!titleKey) return
+    document.title = value.t(titleKey)
     setMeta('meta[name="description"]', 'content', value.t('meta.description'))
     setMeta('meta[property="og:title"]', 'content', value.t('meta.title'))
     setMeta('meta[property="og:description"]', 'content', value.t('meta.description'))
     setMeta('meta[property="og:locale"]', 'content', meta.ogLocale)
-  }, [meta.dir, meta.htmlLang, meta.ogLocale, value])
+  }, [meta.dir, meta.htmlLang, meta.ogLocale, titleKey, value])
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>
 }

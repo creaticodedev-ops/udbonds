@@ -7,6 +7,14 @@ import { ArrowIcon } from '../ui'
 
 const DURATIONS = ['15d', '1m']
 const MAX_AMOUNT = 100_000_000
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+const PHONE = /^\+[1-9]\d{7,14}$/
+const FIELD_ERRORS = ['amount', 'email', 'phone']
+
+const normalizePhone = (raw) => {
+  const compact = raw.trim().replace(/[\s().\-\u00a0\u202f]/g, '')
+  return compact.startsWith('00') ? `+${compact.slice(2)}` : compact
+}
 
 const parseAmount = (raw) => {
   const cleaned = String(raw).replace(/[\s\u00a0\u202f']/g, '').replace(',', '.')
@@ -18,6 +26,8 @@ const validate = (values) => {
   if (values.firstName.trim().length < 2) errors.firstName = 'required'
   if (values.lastName.trim().length < 2) errors.lastName = 'required'
   if (values.city.trim().length < 2) errors.city = 'required'
+  if (!EMAIL.test(values.email.trim())) errors.email = values.email.trim() ? 'email' : 'required'
+  if (!PHONE.test(normalizePhone(values.phone))) errors.phone = values.phone.trim() ? 'phone' : 'required'
   const amount = parseAmount(values.amount)
   if (!Number.isFinite(amount) || amount < 1 || amount > MAX_AMOUNT) errors.amount = 'amount'
   if (!DURATIONS.includes(values.duration)) errors.duration = 'required'
@@ -40,7 +50,7 @@ const Field = ({ id, label, error, errorText, suffix, ...input }) => (
 export const RegistrationForm = ({ initialOffer, onClose }) => {
   const { t, locale } = useI18n()
   const [offer, setOffer] = useState(OFFERS.some((o) => o.id === initialOffer) ? initialOffer : OFFERS[1].id)
-  const [values, setValues] = useState({ firstName: '', lastName: '', city: '', amount: '', duration: '1m' })
+  const [values, setValues] = useState({ firstName: '', lastName: '', city: '', email: '', phone: '', amount: '', duration: '1m' })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState(false)
   const [status, setStatus] = useState('idle')
@@ -76,6 +86,8 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
         firstName: values.firstName,
         lastName: values.lastName,
         city: values.city,
+        email: values.email.trim(),
+        phone: normalizePhone(values.phone),
         amount,
         duration: values.duration,
         locale,
@@ -84,14 +96,16 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
     } catch (error) {
       setStatus('idle')
       if (error.status === 422 && error.body?.fields) {
-        setErrors(Object.fromEntries(Object.keys(error.body.fields).map((key) => [key, key === 'amount' ? 'amount' : 'required'])))
+        setErrors(
+          Object.fromEntries(Object.keys(error.body.fields).map((key) => [key, FIELD_ERRORS.includes(key) ? key : 'required'])),
+        )
       } else {
         setServerError(t(error.status === 429 ? 'register.errors.rate' : 'register.errors.server'))
       }
     }
   }
 
-  const errorText = (key) => t(`register.errors.${errors[key] === 'amount' ? 'amount' : 'required'}`)
+  const errorText = (key) => t(`register.errors.${FIELD_ERRORS.includes(errors[key]) ? errors[key] : 'required'}`)
 
   return (
     <div className="reg">
@@ -187,6 +201,33 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
               error={errors.city}
               errorText={errorText('city')}
               maxLength={80}
+            />
+            <Field
+              id="email"
+              type="email"
+              label={t('register.email')}
+              autoComplete="email"
+              inputMode="email"
+              dir="ltr"
+              value={values.email}
+              onChange={update('email')}
+              error={errors.email}
+              errorText={errorText('email')}
+              maxLength={254}
+            />
+            <Field
+              id="phone"
+              type="tel"
+              label={t('register.phone')}
+              autoComplete="tel"
+              inputMode="tel"
+              dir="ltr"
+              placeholder={t('register.phoneHint')}
+              value={values.phone}
+              onChange={update('phone')}
+              error={errors.phone}
+              errorText={errorText('phone')}
+              maxLength={24}
             />
             <Field
               id="amount"
