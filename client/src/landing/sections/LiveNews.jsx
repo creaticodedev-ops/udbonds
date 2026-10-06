@@ -398,7 +398,7 @@ export const LiveNews = () => {
   const offline = Boolean(error) && !items.length
 
   return (
-    <section className="section news" id="insights" aria-labelledby="news-title">
+    <section className="section news" id="news" aria-labelledby="news-title">
       <div ref={headRef} className="container news-head">
         <SectionIntro kicker={t('news.kicker')} title={t('news.title')} lead={t('news.lead')} titleId="news-title" />
         <div className="news-meta" data-reveal>

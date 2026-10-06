@@ -27,26 +27,42 @@ export const useReveal = (rescanKey) => {
   }, [rescanKey])
 }
 
-/** Returns the id of the section currently crossing the middle of the viewport. */
+/**
+ * Returns the id of the last section (in display order) whose top has passed the reading line of the viewport.
+ * At the very end of the page the last id wins: the contact block in the footer never reaches that line.
+ */
 export const useActiveSection = (ids) => {
   const [active, setActive] = useState(ids[0])
   const key = ids.join('|')
 
   useEffect(() => {
-    if (!('IntersectionObserver' in window)) return undefined
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id)
-        })
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    )
-    key.split('|').forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
+    const list = key.split('|')
+    let frame = 0
+    const update = () => {
+      frame = 0
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        setActive(list[list.length - 1])
+        return
+      }
+      const line = window.innerHeight * 0.45
+      let current = list[0]
+      list.forEach((id) => {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= line) current = id
+      })
+      setActive(current)
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [key])
 
   return active

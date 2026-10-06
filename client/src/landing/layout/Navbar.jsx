@@ -3,8 +3,81 @@ import { NAV_ITEMS, START_TARGET } from '../../config/site'
 import { useI18n } from '../../i18n/I18nProvider'
 import { scrollToSection, useActiveSection } from '../hooks'
 import { ArrowIcon, LangSwitch, Logo } from '../ui'
+import { SocialLinks } from './SocialLinks'
 
 const SECTION_IDS = NAV_ITEMS.map((item) => item.id)
+const PRIMARY_ITEMS = NAV_ITEMS.filter((item) => item.primary)
+const MORE_ITEMS = NAV_ITEMS.filter((item) => !item.primary)
+/** Desktop "More" disclosure holding the sections that do not fit in the bar. */
+const MoreMenu = ({ active, onNavigate }) => {
+  const { t } = useI18n()
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef(null)
+  const buttonRef = useRef(null)
+  const current = MORE_ITEMS.some((item) => item.id === active)
+
+  useEffect(() => {
+    if (!open) return undefined
+    const onPointerDown = (event) => {
+      if (!rootRef.current?.contains(event.target)) setOpen(false)
+    }
+    const onKey = (event) => {
+      if (event.key !== 'Escape') return
+      setOpen(false)
+      buttonRef.current?.focus()
+    }
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <div
+      ref={rootRef}
+      className={`nav-more${open ? ' is-open' : ''}`}
+      onBlur={(event) => {
+        if (!rootRef.current?.contains(event.relatedTarget)) setOpen(false)
+      }}
+    >
+      <button
+        ref={buttonRef}
+        type="button"
+        className={`nav-more-btn${current ? ' is-current' : ''}`}
+        aria-expanded={open}
+        aria-controls="nav-more-panel"
+        aria-label={`${t('nav.more')} — ${t('nav.moreLabel')}`}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span>{t('nav.more')}</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+          <path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      <div className="nav-more-panel" id="nav-more-panel">
+        <ul>
+          {MORE_ITEMS.map((item) => (
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                aria-current={active === item.id ? 'true' : undefined}
+                onClick={(event) => {
+                  setOpen(false)
+                  onNavigate(event, item.id)
+                }}
+              >
+                <span className="nav-more-dot" aria-hidden="true" />
+                <span>{t(`nav.${item.key}`)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 const MobileMenu = ({ open, onClose, active, onNavigate }) => {
   const { t } = useI18n()
@@ -86,6 +159,10 @@ const MobileMenu = ({ open, onClose, active, onNavigate }) => {
             <span>{t('nav.language')}</span>
             <LangSwitch className="is-large" />
           </div>
+          <div className="menu-lang">
+            <span>{t('footer.social.title')}</span>
+            <SocialLinks />
+          </div>
         </div>
       </nav>
     </div>
@@ -132,7 +209,7 @@ export const Navbar = () => {
           </a>
 
           <nav className="nav-links" aria-label={t('nav.primary')}>
-            {NAV_ITEMS.map((item) => (
+            {PRIMARY_ITEMS.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
@@ -142,6 +219,7 @@ export const Navbar = () => {
                 {t(`nav.${item.key}`)}
               </a>
             ))}
+            <MoreMenu active={active} onNavigate={navigate} />
           </nav>
 
           <div className="nav-actions">

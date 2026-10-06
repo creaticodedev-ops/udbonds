@@ -13,17 +13,42 @@ export const SITE = {
     whatsapp: env.VITE_CONTACT_WHATSAPP || '',
     address: env.VITE_COMPANY_ADDRESS || '',
   },
+  social: {
+    instagram: env.VITE_SOCIAL_INSTAGRAM || '',
+    tiktok: env.VITE_SOCIAL_TIKTOK || '',
+    telegram: env.VITE_SOCIAL_TELEGRAM || '',
+  },
 }
 
-/** Landing page sections reachable from the navbar (order = display order). */
+/**
+ * Every landing page section, in display order. `primary` items are shown directly in the desktop bar,
+ * the others are grouped under "More"; the mobile menu lists them all.
+ */
 export const NAV_ITEMS = [
-  { id: 'top', key: 'home' },
-  { id: 'about', key: 'about' },
-  { id: 'markets', key: 'markets' },
-  { id: 'capital', key: 'investment' },
-  { id: 'offers', key: 'offers' },
-  { id: 'insights', key: 'insights' },
+  { id: 'top', key: 'home', primary: true },
+  { id: 'about', key: 'about', primary: true },
+  { id: 'services', key: 'services', primary: true },
+  { id: 'offers', key: 'offers', primary: true },
+  { id: 'capital', key: 'investment', primary: true },
+  { id: 'markets', key: 'markets', primary: true },
+  { id: 'reviews', key: 'reviews' },
+  { id: 'why', key: 'why' },
+  { id: 'news', key: 'news', primary: true },
+  { id: 'how', key: 'how' },
+  { id: 'approach', key: 'approach' },
+  { id: 'contact', key: 'contact' },
 ]
+
+const httpsUrl = (value) => {
+  try {
+    return new URL(value).protocol === 'https:' ? value : ''
+  } catch {
+    return ''
+  }
+}
+
+/** Official accounts. A network without a configured https:// URL is shown as "coming soon", never linked. */
+export const SOCIAL_LINKS = ['instagram', 'tiktok', 'telegram'].map((key) => ({ key, url: httpsUrl(SITE.social[key]) }))
 
 /** Where "Commencer" leads until registration exists. */
 export const START_TARGET = 'offers'

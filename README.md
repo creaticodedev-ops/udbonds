@@ -104,6 +104,7 @@ Statuses: `pending` → `approved` / `rejected`, `approved` → `active` (or bac
 | `VITE_CONTACT_PHONE` | Contact phone |
 | `VITE_CONTACT_WHATSAPP` | WhatsApp number |
 | `VITE_COMPANY_ADDRESS` | Company address |
+| `VITE_SOCIAL_INSTAGRAM`, `VITE_SOCIAL_TIKTOK`, `VITE_SOCIAL_TELEGRAM` | Official social profiles (full `https://` URLs). Until set, the icons are shown as "coming soon" in the footer and the mobile menu |
 
 The `udbonds` database and its `registrations` collection appear in MongoDB Compass once the first registration request is submitted.
 
@@ -112,6 +113,7 @@ The `udbonds` database and its `registrations` collection appear in MongoDB Comp
 - Translations: `client/src/i18n/dictionaries/{fr,en,ar}.js`
 - Offer levels (placeholders, no figures): `client/src/config/offers.js`
 - Landing sections: `client/src/landing/sections/`
+- Navigation: `NAV_ITEMS` in `client/src/config/site.js` (one entry per section anchor, in page order). Entries marked `primary` appear in the desktop bar and the footer "Navigation" column; the others go to the "Plus" menu and the "Entreprise" column. The mobile menu lists them all
 - Market terminal: `client/src/market/` (charts by TradingView Lightweight Charts™)
 - Reviews carousel: `reviews.items` in the dictionaries — the current entries are illustrative placeholders, labelled as such on the page, and must be replaced with real, verifiable reviews
 - Brand assets: `npm run brand:assets --prefix client` regenerates the trimmed logo, favicons and social image from `client/brand/usbonds-logo-official.png`

@@ -1,8 +1,10 @@
 import { NAV_ITEMS, SITE } from '../../config/site'
 import { useI18n } from '../../i18n/I18nProvider'
 import { LangSwitch, Logo } from '../ui'
+import { SocialLinks } from './SocialLinks'
 
-const COMPANY_LINKS = ['services', 'why', 'how', 'approach']
+const NAV_LINKS = NAV_ITEMS.filter((item) => item.primary)
+const COMPANY_LINKS = NAV_ITEMS.filter((item) => !item.primary && item.id !== 'contact')
 
 const ContactList = () => {
   const { t } = useI18n()
@@ -52,6 +54,10 @@ export const Footer = () => {
           <div className="foot-brand">
             <Logo className="foot-logo" />
             <p>{t('footer.statement')}</p>
+            <div className="foot-social">
+              <span>{t('footer.social.title')}</span>
+              <SocialLinks />
+            </div>
           </div>
           <div className="foot-lang">
             <span>{t('footer.language')}</span>
@@ -63,7 +69,7 @@ export const Footer = () => {
           <nav className="foot-col" aria-label={t('footer.navTitle')}>
             <h3>{t('footer.navTitle')}</h3>
             <ul className="foot-list">
-              {NAV_ITEMS.map((item) => (
+              {NAV_LINKS.map((item) => (
                 <li key={item.id}>
                   <a href={`#${item.id}`}>{t(`nav.${item.key}`)}</a>
                 </li>
@@ -73,9 +79,9 @@ export const Footer = () => {
           <nav className="foot-col" aria-label={t('footer.companyTitle')}>
             <h3>{t('footer.companyTitle')}</h3>
             <ul className="foot-list">
-              {COMPANY_LINKS.map((id) => (
-                <li key={id}>
-                  <a href={`#${id}`}>{t(`footer.company.${id}`)}</a>
+              {COMPANY_LINKS.map((item) => (
+                <li key={item.id}>
+                  <a href={`#${item.id}`}>{t(`nav.${item.key}`)}</a>
                 </li>
               ))}
             </ul>
