@@ -5,9 +5,10 @@ import { adminApi } from './api'
 import { ApplicationDrawer } from './ApplicationDrawer'
 import { Applications } from './Applications'
 import { formatCount } from './format'
-import { ApplicationsIcon, BellIcon, CloseIcon, ExternalIcon, LogoutIcon, MenuIcon, OverviewIcon } from './icons'
+import { ApplicationsIcon, BellIcon, CloseIcon, ExternalIcon, LogoutIcon, MenuIcon, OverviewIcon, SettingsIcon } from './icons'
 import { NotificationPanel, Toasts } from './NotificationCenter'
 import { Overview } from './Overview'
+import { Settings } from './Settings'
 import { useAdminText } from './strings'
 import { useAdminStream } from './useAdminStream'
 import { useNotifications } from './useNotifications'
@@ -15,13 +16,16 @@ import { useNotifications } from './useNotifications'
 const ID = /^[a-f0-9]{24}$/i
 const REFRESH_BATCH_MS = 150
 
+const VIEW_PATHS = { overview: '/admin', applications: '/admin/applications', settings: '/admin/settings' }
+
 const readRoute = () => {
   const { pathname, search } = window.location
   const id = new URLSearchParams(search).get('open')
-  return { view: /^\/admin\/applications\/?$/.test(pathname) ? 'applications' : 'overview', id: id && ID.test(id) ? id : null }
+  const view = Object.keys(VIEW_PATHS).find((key) => key !== 'overview' && new RegExp(`^${VIEW_PATHS[key]}/?$`).test(pathname)) || 'overview'
+  return { view, id: id && ID.test(id) ? id : null }
 }
 
-const pathFor = ({ view, id }) => `${view === 'applications' ? '/admin/applications' : '/admin'}${id ? `?open=${id}` : ''}`
+const pathFor = ({ view, id }) => `${VIEW_PATHS[view] || VIEW_PATHS.overview}${id ? `?open=${id}` : ''}`
 
 const useStats = (version) => {
   const [state, setState] = useState({ data: null, error: null })
@@ -179,6 +183,7 @@ export const Dashboard = ({ onLogout }) => {
             <span>{a('nav.notifications')}</span>
             {unread ? <span className="adm-count is-alert">{formatCount(unread, locale)}</span> : null}
           </button>
+          {navLink('settings', SettingsIcon)}
         </nav>
 
         <div className="adm-side-foot">
@@ -247,7 +252,9 @@ export const Dashboard = ({ onLogout }) => {
         </header>
 
         <main className="adm-content" id="main">
-          {route.view === 'applications' ? (
+          {route.view === 'settings' ? (
+            <Settings />
+          ) : route.view === 'applications' ? (
             <Applications version={version} fresh={fresh} onOpen={openApplication} onChanged={refresh} />
           ) : (
             <Overview

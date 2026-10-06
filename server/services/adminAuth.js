@@ -165,3 +165,22 @@ export const resetPassword = async (token, password) => {
   failures.clear()
   return true
 }
+
+/**
+ * Changes the password from a signed-in session: stores the new hash, cancels any pending reset link
+ * and signs out the other sessions. The caller re-issues the current session cookie.
+ */
+export const changePassword = async (password) => {
+  const passwordHash = await hashPassword(password)
+  const doc = await AdminAccount.findOneAndUpdate(
+    { key: 'primary' },
+    {
+      $set: { passwordHash, passwordChangedAt: new Date(), resetTokenHash: null, resetExpiresAt: null, sessionSecret: randomBytes(32).toString('base64url') },
+      $inc: { sessionVersion: 1 },
+    },
+    { new: true },
+  ).lean()
+  if (!doc) return false
+  account = doc
+  return true
+}

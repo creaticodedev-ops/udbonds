@@ -420,6 +420,175 @@ html[lang='ar'] :is(.reg-offers legend, .reg-durations legend, .field label) {
   border-bottom-color: rgba(212, 119, 110, 0.7);
 }
 
+/* International phone: country selector + national number */
+.phone-wrap {
+  position: relative;
+}
+
+.phone-country {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 9px;
+  height: 36px;
+  margin-inline-end: 14px;
+  padding: 0 14px 0 2px;
+  border: 0;
+  border-inline-end: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text-strong);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: color 0.2s var(--ease);
+}
+
+.phone-country:hover,
+.phone-field.is-open .phone-country {
+  color: var(--white);
+}
+
+.phone-country:focus-visible {
+  outline: 2px solid var(--green-bright);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+.phone-flag {
+  flex: none;
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.phone-flag.is-blank {
+  background: var(--line-strong);
+}
+
+.phone-caret {
+  color: var(--text-dim);
+  transition:
+    transform 0.3s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.phone-country:hover .phone-caret,
+.phone-field.is-open .phone-caret {
+  color: var(--green-bright);
+}
+
+.phone-field.is-open .phone-caret {
+  transform: rotate(180deg);
+}
+
+.phone-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline: 0;
+  z-index: 5;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.85);
+  animation: phone-menu-in 0.22s var(--ease) both;
+}
+
+.phone-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text-dim);
+}
+
+.field .phone-search input {
+  height: 46px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.phone-list {
+  max-height: 264px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+.phone-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+.phone-list li.is-active {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+}
+
+.phone-list li.is-current {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.phone-list li.is-last-top {
+  margin-bottom: 9px;
+}
+
+.phone-list li.is-last-top::after {
+  content: '';
+  position: absolute;
+  inset-inline: 10px;
+  bottom: -5px;
+  height: 1px;
+  background: var(--line);
+}
+
+.phone-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phone-code {
+  color: var(--text-dim);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.phone-list li.is-current .phone-code {
+  color: var(--green-bright);
+}
+
+.phone-empty {
+  padding: 18px 16px;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
+@keyframes phone-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
 .reg-durations {
   margin-top: 8px;
 }
@@ -604,8 +773,13 @@ html[lang='ar'] :is(.reg-offers legend, .reg-durations legend, .field label) {
 
 @media (prefers-reduced-motion: reduce) {
   .overlay-loading span,
-  .reg-spinner {
+  .reg-spinner,
+  .phone-menu {
     animation: none !important;
+  }
+
+  .phone-caret {
+    transition: none;
   }
 
   .reg-check circle,

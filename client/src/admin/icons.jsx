@@ -28,6 +28,14 @@ export const ApplicationsIcon = () => (
   </Icon>
 )
 
+export const SettingsIcon = () => (
+  <Icon>
+    <path d="M2.5 5.5h7M13.5 5.5h2M2.5 12.5h2M8.5 12.5h7" />
+    <circle cx="11.5" cy="5.5" r="2" />
+    <circle cx="6.5" cy="12.5" r="2" />
+  </Icon>
+)
+
 export const BellIcon = () => (
   <Icon>
     <path d="M4.5 12.5V8a4.5 4.5 0 0 1 9 0v4.5l1.25 1.5H3.25z" />

@@ -37,6 +37,7 @@ export const adminApi = {
   forgotPassword: (locale) => request('/password/forgot', { method: 'POST', body: { locale } }),
   verifyReset: (token) => request('/password/verify', { method: 'POST', body: { token } }),
   resetPassword: (token, password, confirm) => request('/password/reset', { method: 'POST', body: { token, password, confirm } }),
+  changePassword: (current, password, confirm) => request('/password/change', { method: 'POST', body: { current, password, confirm } }),
   stats: (signal) => request(`/stats?tz=${encodeURIComponent(timeZone())}`, { signal }),
   applications: (params, signal) => request(`/registrations?${new URLSearchParams(params)}`, { signal }),
   application: (id, signal) => request(`/registrations/${encodeURIComponent(id)}`, { signal }),

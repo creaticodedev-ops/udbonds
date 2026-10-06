@@ -6,6 +6,7 @@ import { DURATIONS, OFFER_IDS, Registration, STATUSES, TRANSITIONS, toApplicatio
 import { publish, subscribe } from '../services/adminEvents.js'
 import {
   adminConfigured,
+  changePassword,
   checkPassword,
   clearFailures,
   closeSession,
@@ -154,6 +155,34 @@ adminRouter.post('/password/reset', async (req, res, next) => {
 })
 
 adminRouter.use(requireAdmin)
+
+/* ── Settings: change password (signed in, current password required) ── */
+
+adminRouter.post('/password/change', async (req, res, next) => {
+  try {
+    const key = req.ip || 'unknown'
+    if (loginBlocked(key)) return res.status(429).json({ error: 'Too many attempts' })
+    const { current, password, confirm } = req.body || {}
+    if (!(await checkPassword(current))) {
+      recordFailure(key)
+      await wait(400)
+      return res.status(422).json({ error: 'Invalid password', fields: { current: 'wrong' } })
+    }
+    const fields = {}
+    const problem = passwordProblem(password)
+    if (problem) fields.password = problem
+    else if (password === current || (await isCurrentPassword(password))) fields.password = 'reused'
+    if (confirm !== password) fields.confirm = 'mismatch'
+    if (Object.keys(fields).length) return res.status(422).json({ error: 'Invalid password', fields })
+    if (!(await changePassword(password))) return res.status(503).json({ error: 'Admin not configured' })
+    clearFailures(key)
+    openSession(req, res)
+    console.log('[admin] Administrator password changed from Settings - other sessions signed out')
+    res.json({ changed: true })
+  } catch (error) {
+    next(error)
+  }
+})
 
 /* ── Real-time stream (Server-Sent Events) ── */
 

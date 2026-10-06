@@ -32,6 +32,7 @@ const registrationSchema = new mongoose.Schema(
     email: { type: String, trim: true, lowercase: true, maxlength: 254 },
     // International format (+ country code), used for the WhatsApp confirmation. Same legacy caveat as email.
     phone: { type: String, trim: true, maxlength: 16 },
+    phoneCountry: { type: String, trim: true, maxlength: 2 },
     amount: { type: Number, required: true, min: 1, max: 100_000_000 },
     currency: { type: String, default: 'USD' },
     duration: { type: String, enum: DURATIONS, required: true },
@@ -64,6 +65,7 @@ export const toApplication = (doc) => ({
   city: doc.city,
   email: doc.email || '',
   phone: doc.phone || '',
+  phoneCountry: doc.phoneCountry || '',
   amount: doc.amount,
   currency: doc.currency || 'USD',
   duration: doc.duration,

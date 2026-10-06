@@ -38,7 +38,7 @@ Other scripts: `npm run build`, `npm run lint`, `npm run dev:client`, `npm run d
 | `GET /api/market/candles?symbol=&tf=` | OHLCV candles — `tf` is one of `1m`, `5m`, `15m`, `1h`, `4h`, `1d`, `1w` |
 | `GET /api/market/overview?category=` or `?ids=` | Watchlist rows: price, change versus previous close, 24-hour sparkline |
 | `GET /api/news?lang=` | Latest financial headlines (`fr`, `en` or `ar`), newest first, deduplicated |
-| `POST /api/registrations` | Registration request (`offer`, `firstName`, `lastName`, `city`, `email`, `phone` in international format, `amount`, `duration` = `15d` or `1m`, `locale`) |
+| `POST /api/registrations` | Registration request (`offer`, `firstName`, `lastName`, `city`, `email`, `phone` + `phoneCountry` (validated with libphonenumber-js and stored in E.164, e.g. `+212612345678`), `amount`, `duration` = `15d` or `1m`, `locale`) |
 
 The catalogue lives in `server/services/instruments.js` (Dukascopy code, precision, currency). Market data comes from public, unauthenticated feeds, cached and throttled server-side:
 
@@ -58,6 +58,10 @@ The administrator account lives in the `adminaccounts` collection. On first star
 
 Password reset ("Forgot password?" on the login page): a single-use token valid 30 minutes is generated and only its SHA-256 hash is stored. The link (`/admin/reset#token=…`, the token stays in the URL fragment) is e-mailed to `ADMIN_EMAIL` when SMTP is configured, otherwise printed in the API server terminal. Setting the new password (confirmation required, at least 3 character types) rotates the session secret and signs out every session.
 
+Change password (dashboard → Settings, `/admin/settings`): requires the current password, then the new one twice (same rules). The new hash replaces the old one, any pending reset link is cancelled and the other sessions are signed out; the current session stays open.
+
+WhatsApp number: the registration form has a country selector (flags, search by name or dialing code, Morocco by default). The number is entered in national format, validated for the selected country and stored as the complete international number.
+
 WhatsApp confirmation: approving an application opens WhatsApp (`wa.me`) on the number submitted in the form, with a confirmation message in the applicant's language (name, offer, amount, duration). The message can be edited and re-sent from the application drawer; the admin presses Send in WhatsApp.
 
 Statuses: `pending` → `approved` / `rejected`, `approved` → `active` (or back to `pending` / `rejected`), `rejected` → `pending`, `active` → `completed`, `completed` → `active`. Every change is recorded in the application's `history`. Legacy statuses are migrated on start-up (`new` / `contacted` → `pending`, `closed` → `completed`).
@@ -68,6 +72,7 @@ Statuses: `pending` → `approved` / `rejected`, `approved` → `active` (or bac
 | `POST /password/forgot` | Issues a reset link (`{ locale }`), answers `202` with the delivery channel |
 | `POST /password/verify` | Checks a reset token (`{ token }`) — `410` if invalid or expired |
 | `POST /password/reset` | Sets the new password (`{ token, password, confirm }`) — `422` with field errors |
+| `POST /password/change` | Signed in: changes the password (`{ current, password, confirm }`) — `422` with field errors |
 | `GET /stream` | Server-Sent Events: `registration`, `application`, `notifications` |
 | `GET /registrations?q=&status=&offer=&duration=&sort=&order=&page=&limit=` | Paginated applications, with per-status counts |
 | `GET /registrations/:id` | Application detail and allowed transitions |

@@ -215,12 +215,12 @@
   font-size: 0.75rem;
 }
 
-.adm-login .field {
+:is(.adm-login, .adm-pass-form) .field {
   display: grid;
   min-width: 0;
 }
 
-.adm-login .field label {
+:is(.adm-login, .adm-pass-form) .field label {
   margin-bottom: 8px;
   color: var(--text-dim);
   font-size: 0.6875rem;
@@ -229,14 +229,14 @@
   text-transform: uppercase;
 }
 
-.adm-login .field-control {
+:is(.adm-login, .adm-pass-form) .field-control {
   position: relative;
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--line-strong);
 }
 
-.adm-login .field-control::after {
+:is(.adm-login, .adm-pass-form) .field-control::after {
   content: '';
   position: absolute;
   inset-inline: 0;
@@ -248,15 +248,15 @@
   transition: transform 0.5s var(--ease);
 }
 
-[dir='rtl'] .adm-login .field-control::after {
+[dir='rtl'] :is(.adm-login, .adm-pass-form) .field-control::after {
   transform-origin: right;
 }
 
-.adm-login .field-control:focus-within::after {
+:is(.adm-login, .adm-pass-form) .field-control:focus-within::after {
   transform: scaleX(1);
 }
 
-.adm-login .field input {
+:is(.adm-login, .adm-pass-form) .field input {
   flex: 1;
   min-width: 0;
   height: 54px;
@@ -271,14 +271,14 @@
   letter-spacing: 0.04em;
 }
 
-.adm-login .field-error {
+:is(.adm-login, .adm-pass-form) .field-error {
   min-height: 22px;
   padding-top: 6px;
   color: #d4776e;
   font-size: 0.8125rem;
 }
 
-.adm-login .field.has-error .field-control {
+:is(.adm-login, .adm-pass-form) .field.has-error .field-control {
   border-bottom-color: rgba(212, 119, 110, 0.7);
 }
 
@@ -427,12 +427,119 @@
   opacity: 1;
 }
 
+/* Settings: change password */
+.adm-pass {
+  display: grid;
+  gap: 28px;
+  max-width: 1040px;
+}
+
+.adm-pass-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.adm-pass-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(34, 181, 115, 0.32);
+  border-radius: 12px;
+  background: rgba(0, 154, 90, 0.08);
+  color: var(--green-bright);
+}
+
+.adm-pass-head h2 {
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+html[lang='ar'] .adm-pass-head h2 {
+  font-family: var(--font-arabic);
+  letter-spacing: 0;
+}
+
+.adm-pass-head p {
+  max-width: 46ch;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.adm-pass-form {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  max-width: 520px;
+}
+
+.adm-pass-form .field + .adm-rules {
+  margin-top: -8px;
+}
+
+.adm-pass-form .adm-alert {
+  margin: 0 0 8px;
+}
+
+.adm-pass-done {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(34, 181, 115, 0.32);
+  border-radius: 12px;
+  background: rgba(0, 154, 90, 0.08);
+  color: var(--text-strong);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  animation: adm-step-in 0.5s var(--ease) both;
+}
+
+.adm-pass-done:empty {
+  display: none;
+}
+
+.adm-pass-done svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--green-bright);
+}
+
+.adm-pass-actions {
+  margin-top: 12px;
+}
+
+.adm-pass-submit {
+  gap: 10px;
+  min-height: 52px;
+}
+
+.adm-pass-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (min-width: 1024px) {
+  .adm-pass {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: 48px;
+    padding: 36px;
+  }
+}
+
 html[lang='ar'] :is(.adm-login-title, .adm-title, .adm-kpi-value, .adm-invest-amount, .adm-profile h2) {
   font-family: var(--font-arabic);
   letter-spacing: 0;
 }
 
-html[lang='ar'] :is(.adm-login .field label, .adm-kpi-label, .adm-table th, .adm-block h3, .adm-invest-label, .adm-side-label, .adm-note-title) {
+html[lang='ar'] :is(:is(.adm-login, .adm-pass-form) .field label, .adm-kpi-label, .adm-table th, .adm-block h3, .adm-invest-label, .adm-side-label, .adm-note-title) {
   font-size: 0.8125rem;
   letter-spacing: 0;
   text-transform: none;
@@ -2963,7 +3070,8 @@ html[lang='ar'] .adm-notes-head h2 {
   .adm-bell.has-unread svg,
   .adm-ghost,
   .adm-progress::after,
-  .adm-login-step {
+  .adm-login-step,
+  .adm-pass-done {
     animation: none !important;
   }
 

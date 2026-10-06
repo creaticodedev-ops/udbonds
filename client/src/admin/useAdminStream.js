@@ -39,28 +39,36 @@ export const useAdminStream = (onEvent) => {
           }
         }),
       )
+      // The stream keeps the cookie it was opened with: after a password change in Settings this tab holds
+      // a newer session, so the session is checked before signing out.
       source.addEventListener('expired', () => {
         source.close()
-        window.dispatchEvent(new Event(UNAUTHORIZED_EVENT))
+        setLive(false)
+        recover(0)
       })
       source.onerror = () => {
         setLive(false)
         if (source.readyState !== EventSource.CLOSED) return
         // The browser gave up (HTTP error): check the session before trying again.
-        timer = setTimeout(async () => {
-          if (!alive) return
-          try {
-            const session = await adminApi.session()
-            if (!session.authenticated) {
-              window.dispatchEvent(new Event(UNAUTHORIZED_EVENT))
-              return
-            }
-          } catch {
-            /* API unreachable — retry anyway */
-          }
-          if (alive) connect()
-        }, RECONNECT_MS)
+        recover(RECONNECT_MS)
       }
+    }
+
+    const recover = (delay) => {
+      clearTimeout(timer)
+      timer = setTimeout(async () => {
+        if (!alive) return
+        try {
+          const session = await adminApi.session()
+          if (!session.authenticated) {
+            window.dispatchEvent(new Event(UNAUTHORIZED_EVENT))
+            return
+          }
+        } catch {
+          /* API unreachable — retry anyway */
+        }
+        if (alive) connect()
+      }, delay)
     }
 
     connect()

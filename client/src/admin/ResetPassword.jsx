@@ -5,50 +5,11 @@ import { adminApi } from './api'
 import { AuthLayout, PasswordField } from './AuthLayout'
 import { formatClock } from './format'
 import { CheckIcon } from './icons'
+import { PasswordRules, Strength } from './PasswordStrength'
+import { problemOf } from './passwordRules'
 import { useAdminText } from './strings'
 
-const MIN = 12
-const MAX = 128
-
 const readToken = () => new URLSearchParams(window.location.hash.slice(1)).get('token') || ''
-const classesOf = (value) => [/[a-z]/, /[A-Z]/, /\d/, /[^A-Za-z0-9]/].filter((re) => re.test(value)).length
-
-/** Same rules as the API (server/services/password.js). */
-const problemOf = (value) => {
-  if (value.length < MIN) return 'short'
-  if (value.length > MAX) return 'long'
-  return new Set(value).size < 5 || classesOf(value) < 3 ? 'weak' : null
-}
-
-const strengthOf = (value) => {
-  if (!value) return 0
-  if (problemOf(value)) return 1
-  return Math.min(4, 2 + (value.length >= 16) + (classesOf(value) === 4))
-}
-
-const Strength = ({ value }) => {
-  const a = useAdminText()
-  const score = strengthOf(value)
-  return (
-    <div className={`adm-strength is-${score}`} aria-live="polite">
-      <span className="adm-strength-bars" aria-hidden="true">
-        {[1, 2, 3, 4].map((n) => (
-          <i key={n} className={n <= score ? 'is-on' : undefined} />
-        ))}
-      </span>
-      <span>
-        {a('reset.strength.label')} · <strong>{a(`reset.strength.${score}`)}</strong>
-      </span>
-    </div>
-  )
-}
-
-const Rule = ({ ok, children }) => (
-  <li className={ok ? 'is-ok' : undefined}>
-    <CheckIcon size={14} />
-    <span>{children}</span>
-  </li>
-)
 
 /** Opened from the reset link: `/admin/reset#token=…` (the fragment never reaches the server logs). */
 export const ResetPassword = ({ onDone, onRequestNew }) => {
@@ -198,11 +159,7 @@ export const ResetPassword = ({ onDone, onRequestNew }) => {
         >
           <Strength value={password} />
         </PasswordField>
-        <ul className="adm-rules" id="adm-reset-rules">
-          <Rule ok={password.length >= MIN}>{a('reset.rules.length')}</Rule>
-          <Rule ok={classesOf(password) >= 3}>{a('reset.rules.mix')}</Rule>
-          <Rule ok={Boolean(confirm) && confirm === password}>{a('reset.rules.match')}</Rule>
-        </ul>
+        <PasswordRules id="adm-reset-rules" password={password} confirm={confirm} />
         <PasswordField
           id="adm-confirm-password"
           label={a('reset.confirm')}

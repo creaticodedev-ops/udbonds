@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { parsePhoneNumberFromString } from 'libphonenumber-js/max'
 import { dbState } from '../configs/db.js'
 import { Notification, toNotification } from '../models/Notification.js'
 import { DURATIONS, OFFER_IDS, Registration, toApplication } from '../models/Registration.js'
@@ -9,13 +10,20 @@ export const registrationsRouter = Router()
 const WINDOW_MS = 10 * 60 * 1000
 const MAX_PER_WINDOW = 5
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-const PHONE = /^\+[1-9]\d{7,14}$/
+const COUNTRY = /^[A-Z]{2}$/
 const hits = new Map()
 
-/** "+212 6 12-34 56 78" or "00212…" → "+212612345678" (E.164). */
-const normalizePhone = (value) => {
-  const compact = typeof value === 'string' ? value.trim().replace(/[\s().\-\u00a0\u202f]/g, '') : ''
-  return compact.startsWith('00') ? `+${compact.slice(2)}` : compact
+/**
+ * Validates the number against the numbering plan of its country and returns the complete
+ * international number in E.164 ("+212612345678"), or null.
+ */
+const parsePhone = (value, country) => {
+  const compact = typeof value === 'string' ? value.trim().replace(/[\s().\-\u00a0\u202f]/g, '').slice(0, 32) : ''
+  const input = compact.startsWith('00') ? `+${compact.slice(2)}` : compact
+  if (!input) return null
+  const defaultCountry = typeof country === 'string' && COUNTRY.test(country) ? country : undefined
+  const parsed = parsePhoneNumberFromString(input, defaultCountry)
+  return parsed?.isValid() ? { phone: parsed.number, phoneCountry: parsed.country || defaultCountry || '' } : null
 }
 
 const rateLimited = (ip) => {
@@ -29,13 +37,15 @@ const rateLimited = (ip) => {
 const text = (value, max) => (typeof value === 'string' ? value.trim().replace(/\s+/g, ' ').slice(0, max) : '')
 
 const validate = (body = {}) => {
+  const phone = parsePhone(body.phone, body.phoneCountry)
   const data = {
     offer: text(body.offer, 20),
     firstName: text(body.firstName, 60),
     lastName: text(body.lastName, 60),
     city: text(body.city, 80),
     email: text(body.email, 254).toLowerCase(),
-    phone: normalizePhone(text(body.phone, 32)),
+    phone: phone?.phone || '',
+    phoneCountry: phone?.phoneCountry || '',
     amount: Number(body.amount),
     duration: text(body.duration, 4),
     locale: ['fr', 'en', 'ar'].includes(body.locale) ? body.locale : 'fr',
@@ -46,7 +56,7 @@ const validate = (body = {}) => {
   if (data.lastName.length < 2) errors.lastName = 'required'
   if (data.city.length < 2) errors.city = 'required'
   if (!EMAIL.test(data.email)) errors.email = 'invalid'
-  if (!PHONE.test(data.phone)) errors.phone = 'invalid'
+  if (!phone) errors.phone = 'invalid'
   if (!Number.isFinite(data.amount) || data.amount < 1 || data.amount > 100_000_000) errors.amount = 'invalid'
   if (!DURATIONS.includes(data.duration)) errors.duration = 'invalid'
   return { data, errors }

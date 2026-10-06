@@ -4,17 +4,13 @@ import { useI18n } from '../../i18n/I18nProvider'
 import { submitRegistration } from '../../market/api'
 import { formatAmount } from '../../market/format'
 import { ArrowIcon } from '../ui'
+import { DEFAULT_COUNTRY, isInternational, parsePhone } from './phone'
+import { PhoneField } from './PhoneField'
 
 const DURATIONS = ['15d', '1m']
 const MAX_AMOUNT = 100_000_000
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-const PHONE = /^\+[1-9]\d{7,14}$/
 const FIELD_ERRORS = ['amount', 'email', 'phone']
-
-const normalizePhone = (raw) => {
-  const compact = raw.trim().replace(/[\s().\-\u00a0\u202f]/g, '')
-  return compact.startsWith('00') ? `+${compact.slice(2)}` : compact
-}
 
 const parseAmount = (raw) => {
   const cleaned = String(raw).replace(/[\s\u00a0\u202f']/g, '').replace(',', '.')
@@ -27,7 +23,7 @@ const validate = (values) => {
   if (values.lastName.trim().length < 2) errors.lastName = 'required'
   if (values.city.trim().length < 2) errors.city = 'required'
   if (!EMAIL.test(values.email.trim())) errors.email = values.email.trim() ? 'email' : 'required'
-  if (!PHONE.test(normalizePhone(values.phone))) errors.phone = values.phone.trim() ? 'phone' : 'required'
+  if (!parsePhone(values.phone, values.phoneCountry)) errors.phone = values.phone.trim() ? 'phone' : 'required'
   const amount = parseAmount(values.amount)
   if (!Number.isFinite(amount) || amount < 1 || amount > MAX_AMOUNT) errors.amount = 'amount'
   if (!DURATIONS.includes(values.duration)) errors.duration = 'required'
@@ -50,7 +46,16 @@ const Field = ({ id, label, error, errorText, suffix, ...input }) => (
 export const RegistrationForm = ({ initialOffer, onClose }) => {
   const { t, locale } = useI18n()
   const [offer, setOffer] = useState(OFFERS.some((o) => o.id === initialOffer) ? initialOffer : OFFERS[1].id)
-  const [values, setValues] = useState({ firstName: '', lastName: '', city: '', email: '', phone: '', amount: '', duration: '1m' })
+  const [values, setValues] = useState({
+    firstName: '',
+    lastName: '',
+    city: '',
+    email: '',
+    phone: '',
+    phoneCountry: DEFAULT_COUNTRY,
+    amount: '',
+    duration: '1m',
+  })
   const [errors, setErrors] = useState({})
   const [touched, setTouched] = useState(false)
   const [status, setStatus] = useState('idle')
@@ -59,10 +64,28 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
   const offerName = (id) => t(`offers.items.${id}.name`)
   const amount = parseAmount(values.amount)
 
-  const update = (key) => (event) => {
-    const next = { ...values, [key]: event.target.value }
+  const change = (patch) => {
+    const next = { ...values, ...patch }
     setValues(next)
     if (touched) setErrors(validate(next))
+  }
+
+  const update = (key) => (event) => change({ [key]: event.target.value })
+
+  // A complete "+33 6…" number (typed, pasted or autofilled) selects its country and shows the national format.
+  const phonePatch = (raw) => {
+    const parsed = parsePhone(raw, values.phoneCountry)
+    return parsed?.country ? { phone: parsed.formatNational(), phoneCountry: parsed.country } : { phone: raw }
+  }
+
+  const onPhoneChange = (event) => {
+    const raw = event.target.value
+    change(raw.length - values.phone.length > 1 && isInternational(raw) ? phonePatch(raw) : { phone: raw })
+  }
+
+  const onPhoneBlur = () => {
+    const patch = phonePatch(values.phone)
+    if (patch.phone !== values.phone || patch.phoneCountry) change(patch)
   }
 
   const onAmountBlur = () => {
@@ -80,6 +103,7 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
     }
     setStatus('sending')
     setServerError('')
+    const phone = parsePhone(values.phone, values.phoneCountry)
     try {
       await submitRegistration({
         offer,
@@ -87,7 +111,8 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
         lastName: values.lastName,
         city: values.city,
         email: values.email.trim(),
-        phone: normalizePhone(values.phone),
+        phone: phone.number,
+        phoneCountry: phone.country || values.phoneCountry,
         amount,
         duration: values.duration,
         locale,
@@ -215,19 +240,18 @@ export const RegistrationForm = ({ initialOffer, onClose }) => {
               errorText={errorText('email')}
               maxLength={254}
             />
-            <Field
+            <PhoneField
               id="phone"
-              type="tel"
               label={t('register.phone')}
-              autoComplete="tel"
-              inputMode="tel"
-              dir="ltr"
-              placeholder={t('register.phoneHint')}
+              locale={locale}
+              t={t}
+              country={values.phoneCountry}
+              onCountry={(code) => change({ phoneCountry: code })}
               value={values.phone}
-              onChange={update('phone')}
+              onChange={onPhoneChange}
+              onBlur={onPhoneBlur}
               error={errors.phone}
               errorText={errorText('phone')}
-              maxLength={24}
             />
             <Field
               id="amount"
