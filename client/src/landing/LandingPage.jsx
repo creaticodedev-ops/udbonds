@@ -30,13 +30,13 @@ export const LandingPage = () => {
         <Hero />
         <Intro />
         <Services />
-        <OffersPreview />
-        <CapitalSection />
-        <MarketSection />
-        <Reviews />
         <WhyUSBonds />
-        <LiveNews />
+        <MarketSection />
+        <CapitalSection />
+        <OffersPreview />
+        <Reviews />
         <HowItWorks />
+        <LiveNews />
         <Approach />
         <FinalCTA />
       </main>
